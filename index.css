@@ -1,0 +1,181 @@
+.rt:before{
+    display: block;
+	content: "";
+	height: 110px;
+	margin: -110px 0 0;
+}
+body{
+    background: url("image/fon-peper.jpeg") repeat fixed;
+    padding: 0;
+    margin: 0;
+}
+p{
+    text-align: justify;
+    font-size: 12pt;
+    text-indent: 4em;
+    font-family: "Trebuchet MS", sans-serif;
+
+}
+h2{
+    text-align: center;
+    font-family: "Times New Roman", serif;
+    font-size: 18pt;
+    
+
+}
+a{
+    text-decoration: none;
+    color: antiquewhite;
+}
+span{        
+    font-size: 18pt;
+    font-style: oblique;
+}
+header{
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.25), 7px 7px 5px rgba(0, 0, 0, 0.22);
+    position: fixed;
+    background:  #060d2e;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    padding: 5px;   
+    z-index: 2;
+}
+.login{
+    color: aqua;
+    position: fixed;
+    right: 10px;
+    top: 10px;
+    background: #12131f;
+    z-index: 10;
+}
+.invisible{
+    visibility: hidden;
+            }
+.login>a{
+    display: inline-block;
+    color: aqua;    
+    padding: 10px;
+}
+.forms{
+    position: fixed;
+    width: 500px;
+    height: 300px;
+    top: 50%;
+    left: 50%;
+    margin-left: -250px;
+    margin-top: -150px;  
+    z-index: 11;
+    background: green;
+}
+
+
+.logo{ 
+    float: left;
+    border: 1px solid #ef0303;
+    width: 90px;
+    height: 90px;    
+}
+nav{    
+    margin-left: 95px;    
+}
+nav ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.topmenu>li{  
+    position: relative;
+    display: inline-block;  
+    width: 5em; 
+    line-height: 28px;
+    text-align: center; 
+    padding-bottom: 4px;
+    color: aliceblue;     
+    background: #0b1852;
+    vertical-align: middle;
+}
+nav ul li a{  
+     display: block;          
+ }
+.topmenu li:hover {    
+    background: #0f2171;    
+}
+.submenu{
+    background: #354488;
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    margin: 0;
+    top: 100%;
+    width: 150%;
+}
+.topmenu li:hover>.submenu{
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 1s ease-out 0s;
+}
+.container{                 /* Основной слой-контейнер для контента */
+    position: relative;
+    width: 80%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    
+ }
+.leftcol{                   /* Левая колонка*/
+    position: absolute;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.25), 7px 7px 5px rgba(0, 0, 0, 0.22);
+    background: #a8aaa4;
+    width: 23%;
+    height: 1000px;
+    padding: 15px;    
+}
+.rightcol{                  /*Правая колонка*/
+    position: relative;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.25), 7px 7px 5px rgba(0, 0, 0, 0.22);
+    background: rgb(115, 199, 115);
+    margin-left: 27%;
+    height: 1000px;    
+    padding: 15px;    
+}
+footer{                    /* подвал */
+     background: #060d2e;
+     color: antiquewhite;
+     width: 80%;
+     margin-right: auto;
+     margin-left: auto;
+     height: 80px;
+     clear: left;
+     padding: 0px;
+     text-align: center;
+ }
+
+@media screen and (orientation: portrait) {
+    .logo{     
+    width: 60px;
+    height: 60px;    
+    }
+    .menu{    
+    margin-left: 65px;        
+    }
+    .container{             /* Основной слой-контейнер для контента */  
+    margin-top: 70px;    
+    }
+    .leftcol{ /* Левая колонка*/
+        position: static;
+        height: 700px;
+        box-sizing: border-box;
+        width: 100%;         
+    }
+    .rightcol{              /*Правая колонка*/        
+        height: 700px;
+        margin-left: 0;
+        clear: left;
+        top: 5px;
+    }
+}
+
+
