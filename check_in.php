@@ -62,13 +62,13 @@ if (isset($_COOKIE['log'])){
     </head>
     <body>
         <div id="login">
-            <form method="POST" id="form">
+            <form method="POST">
                 <fieldset class="clearfix">
-                    <p><span class="fontawesome-user"></span><input type="text" name="log" placeholder="логин" oninput="disab()" pattern="[A-Za-z]{6,30}" required></p> 
-                    <p><span class="fontawesome-lock"></span><input type="password" name="pass" placeholder="пароль" required></p> 
-                    <p><span class="fontawesome-lock"></span><input type="password" placeholder="повторить пароль" required></p>
-                    <p><span class="fontawesome-user"></span><input type="text" name="nic" placeholder="Ваш ник" required></p>
-                    <p><span class="fontawesome-envelope"></span><input type="mail" name="mail" placeholder="адресс эл. почты" required></p>
+                    <p><span class="fontawesome-user"></span><input type="text" name="log" placeholder="логин" onchange="disab()" pattern="[A-Za-z0-9]{6,30}" required></p> 
+                    <p><span class="fontawesome-lock"></span><input type="password" name="pass" placeholder="пароль" pattern="[A-Za-z0-9]{6,30}" required></p> 
+                    <p><span class="fontawesome-lock"></span><input type="password" placeholder="повторить пароль" pattern="[A-Za-z0-9]{6,30}" required></p>
+                    <p><span class="fontawesome-user"></span><input type="text" name="nic" placeholder="Ваш ник"  pattern="[A-Za-z0-9]{6,30}" required></p>
+                    <p><span class="fontawesome-envelope"></span><input type="mail" name="mail" placeholder="адресс эл. почты" pattern="[A-Za-z0-9]{6,30}" required></p>
                     <p><input type="submit" name="submit" value="РЕГИСТРАЦИЯ" disabled ></p>
                 </fieldset>
             </form>
