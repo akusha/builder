@@ -13,7 +13,7 @@
 
 body {
 	background-color: #2c3338;
-	color: #606468;
+	color: #0d4277;
 	font-family: 'Open Sans', Arial, sans-serif;
 	font-size: 14px;
 	line-height: 1.5em;
@@ -82,7 +82,7 @@ p {
 	border-radius: 0px 3px 3px 0px;
 	-moz-border-radius: 0px 3px 3px 0px;
 	-webkit-border-radius: 0px 3px 3px 0px;
-	color: #606468;
+	color: #149523;
 	margin-bottom: 1em;
 	padding: 0 16px;
 	width: 198px;
@@ -116,3 +116,7 @@ p {
 #login > p span {
 	padding-left: 5px;
 }
+::-webkit-input-placeholder {color:#ac6c65;}
+::-moz-placeholder          {color:#ac6c65;}/* Firefox 19+ */
+:-moz-placeholder           {color:#ac6c65;}/* Firefox 18- */
+:-ms-input-placeholder      {color:#ac6c65;}

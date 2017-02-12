@@ -4,7 +4,7 @@
         <title>Личный кабинет</title>
         <link rel="shortcut icon" href="image/logo_100_100.png" type="image/x-icon">
         <meta charset="utf-8">
-        <link rel="stylesheet" href="index.css">        
+        <link rel="stylesheet" href="cabinet.css">        
     </head>
     <body>
 

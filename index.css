@@ -1,140 +1,18 @@
-.rt:before{
-    display: block;
-	content: "";
-	height: 110px;
-	margin: -110px 0 0;
-}
 body{
-    background: #b29292;
-    padding: 0;
-    margin: 0;
-}
-p{
-    text-align: justify;
-    font-size: 12pt;
-    text-indent: 4em;
-    font-family: "Trebuchet MS", sans-serif;
-
-}
-h2{
-    text-align: center;
-    font-family: "Times New Roman", serif;
-    font-size: 18pt;
-    
-
-}
-a{
-    text-decoration: none;
-    color: antiquewhite;
-}
-span{        
-    font-size: 18pt;
-    font-style: oblique;
-}
-header{
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.31);
-    margin: 15px; 
+    background-color: #50654e;
+	color: #394048;
+	font-family: 'Open Sans', Arial, sans-serif;
+	font-size: 14px;
+	line-height: 1.5em;
 }
 .head{
-    position:relative;
-    float: left;
+    margin: 20px;
     text-align: center;
-    background: red;
-}
-.head>span{
-    display: inline-block;
-    height: 25px;
-}
-.login{
-    position: relative;
     float: left;
-    background: #5c5e77;
 }
-.login>a{
-    display: inline-block;
-    color: aqua;    
-    height: 25px;
+.log{
+    
 }
-.invisible{
-    visibility: hidden;
-            }
-.forms{
-    position: fixed;
-    width: 500px;
-    height: 300px;
-    top: 50%;
-    left: 50%;
-    margin-left: -250px;
-    margin-top: -150px;  
-    z-index: 11;
-    background: green;
+span{
+    font-size: 5em;
 }
-
-
-.logo{ 
-    float: left;
-    border: 1px solid #ef0303;
-    width: 90px;
-    height: 90px;    
-}
-nav{    
-    margin-left: 95px;    
-}
-nav ul{
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-.topmenu>li{  
-    position: relative;
-    display: inline-block;  
-    width: 5em; 
-    line-height: 28px;
-    text-align: center; 
-    padding-bottom: 4px;
-    color: aliceblue;     
-    background: #0b1852;
-    vertical-align: middle;
-}
-nav ul li a{  
-     display: block;          
- }
-.topmenu li:hover {    
-    background: #0f2171;    
-}
-.submenu{
-    background: #354488;
-    position: absolute;
-    visibility: hidden;
-    opacity: 0;
-    margin: 0;
-    top: 100%;
-    width: 150%;
-}
-.topmenu li:hover>.submenu{
-    visibility: visible;
-    opacity: 1;
-    transition: opacity 1s ease-out 0s;
-}
-
-footer{                    /* подвал */
-     background: #060d2e;
-     color: antiquewhite;
-     width: 80%;
-     margin-right: auto;
-     margin-left: auto;
-     height: 80px;
-     clear: left;
-     padding: 0px;
-     text-align: center;
- }
-
-@media screen and (orientation: portrait) {
-    .logo{     
-    width: 60px;
-    height: 60px;    
-    }
-    .menu{    
-    margin-left: 65px;        
-    }
-   

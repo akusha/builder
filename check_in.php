@@ -62,82 +62,18 @@ if (isset($_COOKIE['log'])){
     </head>
     <body>
         <div id="login">
-        <form method="POST">
-            <fieldset class="clearfix">
-                <p><span class="fontawesome-user"></span><input type="text" name="log" value="Логин" onBlur="if(this.value == '') this.value = 'Логин'" onFocus="if(this.value == 'Логин') this.value = ''" required></p> 
-                <p><span class="fontawesome-lock"></span><input type="password" name="pass"  value="Пароль" onBlur="if(this.value == '') this.value = 'Пароль'" onFocus="if(this.value == 'Пароль') this.value = ''" required></p> 
-                <p><span class="fontawesome-lock"></span><input type="password" value="Повторить пароль" onBlur="if(this.value == '') this.value = 'Повторить пароль'" onFocus="if(this.value == 'Повторить пароль') this.value = ''" required></p>
-                <p><span class="fontawesome-user"></span><input type="text" name="nic" value="Ваш ник" onBlur="if(this.value == '') this.value = 'Ваш ник'" onFocus="if(this.value == 'Ваш ник') this.value = ''" required></p>
-                <p><span class="fontawesome-envelope"></span><input type="mail" name="mail" value="Эл.адрес" onBlur="if(this.value == '') this.value = 'Эл.адрес'" onFocus="if(this.value == 'Эл.адрес') this.value = ''" required></p>
-                <p><input type="submit" value="РЕГИСТРАЦИЯ"></p>
-            </fieldset>
-        </form>
-        <p>&nbsp;&nbsp;<a href="login.php">Войти в аккаунт</a><span class="fontawesome-arrow-right"></span></p>
-    </div>
-        
-<script>
-    
-    function getXmlHttp(){
-		var xmlhttp;
-		try {
-			xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
-		} catch (e) {
-			try {
-				xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-			} catch (E) {
-				xmlhttp = false;
-			}
-		}
-		if (!xmlhttp && typeof XMLHttpRequest!='undefined') {
-			xmlhttp = new XMLHttpRequest();
-		}
-		return xmlhttp;
-    }
-    
-	var ajax = getXmlHttp();
-    
-    var submit = document.getElementById("submit");
-    
-	
-	document.getElementById("log").oninput = change;
-        
-        function change(event){
-        
-        var value = this.value;
-            
-        var body = "ajax=ajax&log=" + value;
-        
-        sendData(body);        
-        
-    };
-    
-    
-    function sendData(body){    	
-		ajax.open('POST', "check_in.php", true);
-		ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        
-		ajax.onreadystatechange = function() {
-			if (ajax.readyState == 4) {
-				if(ajax.status == 200) {
-					                    
-					var result = ajax.responseText;
-                    
-                    if (result==0)                         
-                        submit.classList.remove("invisible");
-                    else
-                        submit.classList.add("invisible");
-					
-				}
-			}
-		}
-		ajax.send(body);
-	}
-
-    
-        
-</script>
-        
-        
-        
+            <form method="POST" id="form">
+                <fieldset class="clearfix">
+                    <p><span class="fontawesome-user"></span><input type="text" name="log" placeholder="логин" oninput="disab()" pattern="[A-Za-z]{6,30}" required></p> 
+                    <p><span class="fontawesome-lock"></span><input type="password" name="pass" placeholder="пароль" required></p> 
+                    <p><span class="fontawesome-lock"></span><input type="password" placeholder="повторить пароль" required></p>
+                    <p><span class="fontawesome-user"></span><input type="text" name="nic" placeholder="Ваш ник" required></p>
+                    <p><span class="fontawesome-envelope"></span><input type="mail" name="mail" placeholder="адресс эл. почты" required></p>
+                    <p><input type="submit" name="submit" value="РЕГИСТРАЦИЯ" disabled ></p>
+                </fieldset>
+            </form>
+            <p>&nbsp;&nbsp;<a href="login.php">Войти в аккаунт</a><span class="fontawesome-arrow-right"></span></p>
+        </div>
+        <script src="check_in.js"/></script>
     </body>
 </html>
