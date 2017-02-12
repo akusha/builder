@@ -5,7 +5,7 @@
 	margin: -110px 0 0;
 }
 body{
-    background: url("image/fon-peper.jpeg") repeat fixed;
+    background: #b29292;
     padding: 0;
     margin: 0;
 }
@@ -32,31 +32,32 @@ span{
     font-style: oblique;
 }
 header{
-    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.25), 7px 7px 5px rgba(0, 0, 0, 0.22);
-    position: fixed;
-    background:  #060d2e;
-    top: 0;
-    left: 10%;
-    right: 10%;
-    padding: 5px;   
-    z-index: 2;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.31);
+    margin: 15px; 
+}
+.head{
+    position:relative;
+    float: left;
+    text-align: center;
+    background: red;
+}
+.head>span{
+    display: inline-block;
+    height: 25px;
 }
 .login{
-    color: aqua;
-    position: fixed;
-    right: 10px;
-    top: 10px;
-    background: #12131f;
-    z-index: 10;
+    position: relative;
+    float: left;
+    background: #5c5e77;
+}
+.login>a{
+    display: inline-block;
+    color: aqua;    
+    height: 25px;
 }
 .invisible{
     visibility: hidden;
             }
-.login>a{
-    display: inline-block;
-    color: aqua;    
-    padding: 10px;
-}
 .forms{
     position: fixed;
     width: 500px;
@@ -115,32 +116,7 @@ nav ul li a{
     opacity: 1;
     transition: opacity 1s ease-out 0s;
 }
-.container{                 /* Основной слой-контейнер для контента */
-    position: relative;
-    width: 80%;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    margin-top: 100px;
-    margin-left: auto;
-    margin-right: auto;
-    
- }
-.leftcol{                   /* Левая колонка*/
-    position: absolute;
-    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.25), 7px 7px 5px rgba(0, 0, 0, 0.22);
-    background: #a8aaa4;
-    width: 23%;
-    height: 1000px;
-    padding: 15px;    
-}
-.rightcol{                  /*Правая колонка*/
-    position: relative;
-    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.25), 7px 7px 5px rgba(0, 0, 0, 0.22);
-    background: rgb(115, 199, 115);
-    margin-left: 27%;
-    height: 1000px;    
-    padding: 15px;    
-}
+
 footer{                    /* подвал */
      background: #060d2e;
      color: antiquewhite;
@@ -161,21 +137,4 @@ footer{                    /* подвал */
     .menu{    
     margin-left: 65px;        
     }
-    .container{             /* Основной слой-контейнер для контента */  
-    margin-top: 70px;    
-    }
-    .leftcol{ /* Левая колонка*/
-        position: static;
-        height: 700px;
-        box-sizing: border-box;
-        width: 100%;         
-    }
-    .rightcol{              /*Правая колонка*/        
-        height: 700px;
-        margin-left: 0;
-        clear: left;
-        top: 5px;
-    }
-}
-
-
+   
