@@ -57,63 +57,23 @@ if (isset($_COOKIE['log'])){
     <head>
         <title>регистрация</title>
         <link rel="shortcut icon" href="image/logo_100_100.png" type="image/x-icon">
+        <link rel="stylesheet" href="check_in.css">
         <meta charset="utf-8">    
-        <style> 
-            body{
-                background: #b7b2b2;
-                
-            }
-            .view {
-                    padding: px;
-                    width: 250px;
-                    height: 300px;
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    margin: -150px 0 0 -125px;                    
-                    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.25), 7px 7px 5px rgba(0, 0, 0, 0.22);
-                    background: #453e3e;
-                text-align: center;
-            }
-            fieldset{
-                align-content: space-around;
-            }
-            legend {
-                text-align: left;
-                padding: 0px 3px;
-                font-weight: bold;
-                font-variant: small-caps;
-            }            
-            .invisible {
-                visibility: hidden;
-            }
-            label {
-                width: 110px;
-                display: inline-block;
-                vertical-align: top;
-                margin: 6px;
-            }
-            input:focus {
-            background: #98ed8d;
-            }
-            input:required:invalid {
-	           border:1px solid red;
-            }
-        </style>
     </head>
     <body>
-        <div class="view">
-            <form method="post">
-                <fieldset>
-                    <legend>регистрация</legend>
-                    <label>nic:</label><input type="text" name="nic" placeholder="dodik" autofocus><br>
-                    <label>логин:</label><input type="text" name="log" id="log" value="" placeholder="akusha@mail.ru" required><br>
-                    <label>пароль:</label><input type="password" name="pass" required><br>
-                    <label>Почта:</label><input type="email" name="mail" placeholder="akusha@mail.ru"><br>
-                </fieldset>
-                    <input type="submit" value="войти" id="submit" class="invisible">
-            </form>
-        </div>
+        <div id="login">
+        <form method="POST">
+            <fieldset class="clearfix">
+                <p><span class="fontawesome-user"></span><input type="text" name="log" value="Логин" onBlur="if(this.value == '') this.value = 'Логин'" onFocus="if(this.value == 'Логин') this.value = ''" required></p> 
+                <p><span class="fontawesome-lock"></span><input type="password" name="pass"  value="Пароль" onBlur="if(this.value == '') this.value = 'Пароль'" onFocus="if(this.value == 'Пароль') this.value = ''" required></p> 
+                <p><span class="fontawesome-lock"></span><input type="password" value="Повторить пароль" onBlur="if(this.value == '') this.value = 'Повторить пароль'" onFocus="if(this.value == 'Повторить пароль') this.value = ''" required></p>
+                <p><span class="fontawesome-user"></span><input type="text" name="nic" value="Ваш ник" onBlur="if(this.value == '') this.value = 'Ваш ник'" onFocus="if(this.value == 'Ваш ник') this.value = ''" required></p>
+                <p><span class="fontawesome-envelope"></span><input type="mail" name="mail" value="Эл.адрес" onBlur="if(this.value == '') this.value = 'Эл.адрес'" onFocus="if(this.value == 'Эл.адрес') this.value = ''" required></p>
+                <p><input type="submit" value="РЕГИСТРАЦИЯ"></p>
+            </fieldset>
+        </form>
+        <p>&nbsp;&nbsp;<a href="login.php">Войти в аккаунт</a><span class="fontawesome-arrow-right"></span></p>
+    </div>
         
 <script>
     
