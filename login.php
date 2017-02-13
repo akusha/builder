@@ -19,7 +19,7 @@ if (isset($_COOKIE['log'])){
                 or ($stmt->close() === FALSE)) {
                                                 die('Select Error (' . $stmt->errno . ') ' . $stmt->error);
                                                 }
-            if($result->num_rows==0) echo "Пароль неверный.";
+            if($result->num_rows==0) echo "Логин или пароль неверный.";
             else {
                     $row = $result->fetch_assoc();                   
                     setcookie("log", $row["log"]);

@@ -1,6 +1,6 @@
 <?php
 
-include "conectSQL.php"; //соединение с базой данных db
+include "conectSQL.php";
 
 $form = $_POST['form'];
 
