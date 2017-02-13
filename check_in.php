@@ -32,7 +32,7 @@ if (isset($_COOKIE['log'])){
     if (isset($_POST["log"])){
         
             $log = $_POST["log"];
-            $pass = $_POST["pass"];
+            $pass = md5($_POST["pass"]);
             $nic = $_POST["nic"];
             $mail = $_POST["mail"];            
             $stmt = $mysqli->stmt_init();       

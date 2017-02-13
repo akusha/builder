@@ -66,7 +66,7 @@
                 <li><a href="https://ok.ru">odnok</a></li>
             </ul>
         </nav>
-        <script src="cabinet.js"/></script>
+        
         </header>
         <div class='login'><a href='cabinet.php'><?php echo $_COOKIE['log'];  ?></a>/
 			<a href="index.php" onclick="dKuk()"> выход </a>
@@ -87,5 +87,8 @@
         </div>
 			
         </footer>
+
+
+        <script src="cabinet.js"/></script>
     </body>
 </html>

@@ -9,7 +9,7 @@ if (isset($_COOKIE['log'])){
 
     if (isset($_POST['log'])){
             $log = $_POST["log"];
-            $pass = $_POST["pass"];
+            $pass = md5($_POST["pass"]);
             include "conectSQL.php";
             $stmt = $mysqli->stmt_init();
             if(($stmt->prepare("SELECT * FROM users WHERE log=? AND pass=?") === FALSE)

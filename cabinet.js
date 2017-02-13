@@ -3,19 +3,31 @@ function dKuk(){
   	cookie_date.setTime ( cookie_date.getTime() - 10000 );
   	document.cookie = "log=; expires=" + cookie_date.toGMTString();
  }   
+
  var workers = document.getElementById('form_workers'); 
+
  var obgects = document.getElementById('form_obgects');
+
  var httpreq = getXmlHttp();
+
  var currenttable;  	//Выбранная таблица из меню
+
  var submit_obg = document.getElementById('submit_obg');
+
  var update_obg = document.getElementById('update_obg');
+
  var bsubmit = document.getElementById('submit');
+
  var bupdate = document.getElementById('update');
+
  var table = document.getElementById('table');
+ 
  document.getElementById('close_wokers').onclick = function(){workers.classList.add('invisible'); }
+
  document.getElementById('close_obgeсts').onclick = function(){obgects.classList.add('invisible'); }
  
-  function getXmlHttp(){
+ 
+ function getXmlHttp(){
  	var xmlhttp;
  	try {
  		xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
@@ -35,26 +47,11 @@ function dKuk(){
 
  document.getElementById('workers').onclick = function (){   // =====  Выбор пункта меню Рабочие
 
-
  	currenttable = "workers";
-
 
  	var body = "table="+currenttable;
 
-
  	getData(body);    
-
- function click(event){
-
- 	if (currenttable!=="workers") return;
-
- 	var res = document.getElementById('res'),
- 	fam = document.getElementsByName('fam')[0].value,
- 	nam = document.getElementsByName('name')[0].value,
- 	nic = document.getElementsByName('nic')[0].value,
- 	tel = document.getElementsByName('tel')[0].value,
- 	mail = document.getElementsByName('mail')[0].value;
-
 
  }
 
@@ -70,28 +67,9 @@ function dKuk(){
  }
 
 
-
  document.getElementById('jobs').onclick = function(){    
 
  	currenttable = "jobs" ;
-
- document.getElementById('workers').onclick = function (){
-
- 	currenttable = "workers";
-
- 	var body = "table="+currenttable;
-
- 	getData(body);    
-
- }
-
-
- document.getElementById('objects').onclick = function (){
-
- 	currenttable = "objects";
-
- 	var body = "table="+currenttable;
-
 
  	var body = "table="+currenttable;
 
@@ -115,11 +93,6 @@ function dKuk(){
 
  function bdclick() 		//============ Обработчик кнопок; Добавить,Изменить,Удалить ================
  {
-
-
-
-
-
  	
  	var id = this.value; 
  	var name = this.getAttribute('name');
@@ -322,7 +295,9 @@ function dKuk(){
  				document.getElementsByName('tel')[0].value=null;
  				document.getElementsByName('mail')[0].value=null;
  			}
+
  		}
  	}
  	httpreq.send(body);   
+
  }
