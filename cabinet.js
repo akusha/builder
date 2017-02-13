@@ -1,37 +1,21 @@
- 
- document.getElementById('a').onclick = function (){         // ===== функция для удаления куки ========//
- 	var date = new Date(0);
- 	document.cookie = "log=; path=/; expires=" + date.toUTCString();
+function dKuk(){
+    var cookie_date = new Date(0);  // Текущая дата и время
+  	cookie_date.setTime ( cookie_date.getTime() - 1 );
+  	document.cookie = "log=; expires=" + cookie_date.toGMTString();
  }   
-
-
- 
-
  var workers = document.getElementById('form_workers'); 
-
-
  var obgects = document.getElementById('form_obgects');
-
  var httpreq = getXmlHttp();
-
  var currenttable;  	//Выбранная таблица из меню
-
  var submit_obg = document.getElementById('submit_obg');
-
  var update_obg = document.getElementById('update_obg');
-
  var bsubmit = document.getElementById('submit');
-
  var bupdate = document.getElementById('update');
-
  var table = document.getElementById('table');
- 
  document.getElementById('close_wokers').onclick = function(){workers.classList.add('invisible'); }
-
  document.getElementById('close_obgeсts').onclick = function(){obgects.classList.add('invisible'); }
  
- 
- function getXmlHttp(){
+  function getXmlHttp(){
  	var xmlhttp;
  	try {
  		xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
