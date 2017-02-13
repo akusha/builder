@@ -3,6 +3,7 @@
     <head>
         <title>Личный кабинет</title>
         <link rel="shortcut icon" href="image/logo_100_100.png" type="image/x-icon">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="utf-8">
         <link rel="stylesheet" href="cabinet.css">        
     </head>

@@ -165,7 +165,7 @@ footer{                    /* подвал */
     margin-top: 70px;    
     }
     .leftcol{ /* Левая колонка*/
-        position: static;
+        /*position: static;*/
         height: 700px;
         box-sizing: border-box;
         width: 100%;         

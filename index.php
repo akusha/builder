@@ -5,6 +5,7 @@
         <title>accounting</title>
         <link rel="shortcut icon" href="image/logo_100_100.png" type="image/x-icon">
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Учет рабочего времени, рабочий процесс">
         <meta name="keywords" content="работы, табель, часы, рабочий день, зарплата">
         <link rel="stylesheet" href="index.css">

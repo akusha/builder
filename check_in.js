@@ -18,7 +18,7 @@ function getXmlHttp(){
 	var ajax = getXmlHttp();    
     	
 	function disab(){    //Если логин оригинальный, активирует кнопку отправки формы. 
-        var value = this.value;
+        var value = document.getElementsByName('log')[0].value;
         var body = "ajax=ajax&log=" + value;
        	ajax.open('POST', "check_in.php", true);
 		ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
