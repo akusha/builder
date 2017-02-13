@@ -1,3 +1,10 @@
+<?php  
+    if(!isset($_COOKIE['log'])) {               // если не был выполнен вход то перенаправляем на страницу входа.
+        header("Location: login.php");
+        exit; 
+    }
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
