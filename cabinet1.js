@@ -1,9 +1,10 @@
 function dKuk(){
-    var cookie_date = new Date();  // Текущая дата и время
-  	cookie_date.setTime ( cookie_date.getTime() - 10000 );
+    var cookie_date = new Date(0);  // Текущая дата и время
+  	cookie_date.setTime ( cookie_date.getTime() - 1 );
   	document.cookie = "log=; expires=" + cookie_date.toGMTString();
  }   
- var workers = document.getElementById('form_workers'); 
+ 
+var workers = document.getElementById('form_workers'); 
  var obgects = document.getElementById('form_obgects');
  var httpreq = getXmlHttp();
  var currenttable;  	//Выбранная таблица из меню
@@ -322,7 +323,9 @@ function dKuk(){
  				document.getElementsByName('tel')[0].value=null;
  				document.getElementsByName('mail')[0].value=null;
  			}
+
  		}
  	}
  	httpreq.send(body);   
+
  }
