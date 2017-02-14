@@ -19,6 +19,9 @@ body {
 	font-size: 14px;
 	line-height: 1.5em;
 }
+input:disabled {
+	background-color: aqua;
+}
 
 a {
 	color: #eee;
@@ -38,14 +41,6 @@ input {
 	-webkit-appearance: none;
     height: 40px;
 	outline:none;
-}
-input[pattern]:invalid{
-    border: 1px solid #e27b7b;
-    border-left: none;
-}
-input[pattern]:valid{
-    border: 1px solid #229a27;
-    border-left: none;
 }
 p {
 	line-height: 1.5em;
