@@ -62,25 +62,25 @@ if (isset($_COOKIE['log'])){
         <meta charset="utf-8">    
     </head>
     <body>
-        <div id="login">
-            <form method="POST">
-                <fieldset class="clearfix">
-                    <span class="fontawesome-user"></span>
-					<input type="text" name="log" placeholder="логин" oninput="verifyLog()">
-					<span class="fontawesome-lock"></span>
-					<input type="password" name="pass" placeholder="пароль" oninput="verifyPass()"> 
-                    <span class="fontawesome-lock"></span>
-					<input type="password" name="pass" placeholder="повторить пароль" oninput="verifyPass1()" disabled>
-                    <span class="fontawesome-user"></span>
-					<input type="text" name="nic" placeholder="Ваш ник" oninput="verifyNic()">
-                    <span class="fontawesome-envelope"></span>
-					<input type="email" name="mail" placeholder="адресс эл. почты" oninput="verifyMail()">
-					
-                    <p><input type="submit" name="submit" value="РЕГИСТРАЦИЯ" disabled ></p>
-                </fieldset>
-            </form>
-            <p>&nbsp;&nbsp;<a href="login.php">Войти в аккаунт</a><span class="fontawesome-arrow-right"></span></p>
-        </div>
-        <script src="check_in.js"/></script>
+        <form method="POST">
+			<span class="fontawesome-user"></span>
+			<input type="text" name="log" placeholder="логин" oninput="verifyLog()" autofocus>
+			<label for="log">от 3 до 30 латинских символов, цыфр и знаков "-" и "_"</label>
+			<span class="fontawesome-lock"></span>
+			<input type="password" name="pass" placeholder="пароль" oninput="verifyPass()"> 
+			<label for="log">пароль от 6 до 30 латинских символов и цыфр</label>
+			<span class="fontawesome-lock"></span>
+			<input type="password" name="pass" placeholder="повторить пароль" oninput="verifyPass1()" disabled>
+			<label for="log">повторите пароль</label>
+			<span class="fontawesome-user"></span>
+			<input type="text" name="nic" placeholder="Ваш ник" oninput="verifyNic()">
+			<label for="log">короткое имя латинские буквы от 3 до 30 символов</label>
+			<span class="fontawesome-envelope"></span>
+			<input type="email" name="mail" placeholder="адресс эл. почты" oninput="verifyMail()">
+			<label for="log">только латинские символы, цыфры и знаки "_", "-"</label>
+			<input type="submit" name="submit" value="РЕГИСТРАЦИЯ" disabled >
+			<p><a href="login.php">Войти в аккаунт</a><span class="fontawesome-arrow-right"></span></p>
+       </form>
+       <script src="check_in.js"/></script>
     </body>
 </html>

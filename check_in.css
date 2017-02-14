@@ -1,87 +1,63 @@
 @charset "utf-8";
-/* CSS Document */
-
 @import url(http://weloveiconfonts.com/api/?family=fontawesome);
-
-/* ---------- FONTAWESOME ---------- */
 
 [class*="fontawesome-"]:before {
     font-family: 'FontAwesome', sans-serif;
     line-height: 40px
 }
-
-/* ---------- GENERAL ---------- */
-
 body {
 	background-color: #2c3338;
 	color: #4e9be8;
 	font-family: 'Open Sans', Arial, sans-serif;
 	font-size: 14px;
-	line-height: 1.5em;
 }
-input:disabled {
-	background-color: aqua;
+form {
+	margin: 60px auto;
+	width: 280px;
 }
-
-a {
-	color: #eee;
-	text-decoration: none;
+form>span {
+	background-color: #58616c;
+	border-radius: 3px 0px 0px 3px;
+	-moz-border-radius: 3px 0px 0px 3px;
+	-webkit-border-radius: 3px 0px 0px 3px;
+    color: #57aa2b;
+	display: block;
+	float: left;
+	height: 40px;
+	width: 40px;
+	text-align: center;
+	margin: 0;
+	padding: o;
+	
 }
-
-a:hover {
-	text-decoration: underline;
-}
-
 input {
+	display: block;
 	border: none;
 	font-family: 'Open Sans', Arial, sans-serif;
 	font-size: 14px;
-	line-height: 1.5em;;
-	padding: 0;
+	line-height: 1.5em;
 	-webkit-appearance: none;
     height: 40px;
 	outline:none;
 }
-p {
-	line-height: 1.5em;
+input:disabled {
+	opacity: 0.5;
 }
-.clearfix { 
-    border: 0;
-    *zoom: 1;
-} 
-.clearfix:after { clear: both; }
-#login {
-	margin: 30px auto;
-	width: 280px;
-}
-#login form span {
-	background-color: #363b41;
-	border-radius: 3px 0px 0px 3px;
-	-moz-border-radius: 3px 0px 0px 3px;
-	-webkit-border-radius: 3px 0px 0px 3px;
-	padding-bottom: 1px;
-    padding-top: 1px;
-    color: #868d93;
+input:after { 
+	content: "";
 	display: block;
-	float: left;
-	height: 40px;
-	line-height: 40px;
-	text-align: center;
-	width: 40px;
+	height: 0;
+	clear: left;
 }
 input[type="text"], input[type="password"], input[type="email"] {
 	background-color: #3b4148;
 	border-radius: 0px 3px 3px 0px;
 	-moz-border-radius: 0px 3px 3px 0px;
 	-webkit-border-radius: 0px 3px 3px 0px;
-	margin-bottom: 1em;
 	padding: 0 16px;
 	width: 206px;
     color: #7582c7;
 }
-
-input:focus {color:#414f9b;}
-
 input[type="submit"] {
 	border-radius: 3px;
 	-moz-border-radius: 3px;
@@ -92,17 +68,20 @@ input[type="submit"] {
 	text-transform: uppercase;
 	cursor:pointer;
 	width: 280px;
+	opacity: 0.8;
 }
-
 input[type="submit"]:hover {
-	background-color: #295827;
+	opacity: 1;
 }
-
-#login > p {
-	text-align: center;
+label {
+	display: block;
+	margin-bottom: 10px;
+	font-style: italic;
+	text-align: right;
+	font-size: 9px;
+	color: #c48d79;
 }
-
-#login > p span {
+.fontawesome-arrow-right {
 	padding-left: 10px;
 }
 ::-webkit-input-placeholder {color:#ac6c65; font-size: 12px;}
