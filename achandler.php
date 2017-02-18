@@ -38,16 +38,16 @@ if (isset($_POST['operation'])){
 
 	$operation = $_POST['operation'];	
 
+	$date = $_POST['date'];
+	$kagent = $_POST['kagent'];
+	$acount = $_POST['acount'];
+	$state = $_POST['state'];
+	$count = $_POST['count'];
+	$type = $_POST['type'];
+
 	$stmt = $mysqli->stmt_init(); 
 
-    if ($operation == "insert"){
-
-    	$date = $_POST['date'];
-		$kagent = $_POST['kagent'];
-		$acount = $_POST['acount'];
-		$state = $_POST['state'];
-		$count = $_POST['count'];
-		$type = $_POST['type'];
+    if ($operation == "insert"){    	
 	          
         if(($stmt->prepare("INSERT INTO operation (date,k_id,s_id,a_id,value,type) VALUES (?,?,?,?,?,?)") === FALSE) 
             or ($stmt->bind_param('siiiii', $date, $kagent,$state,$acount,$count,$type) === FALSE)
@@ -56,6 +56,19 @@ if (isset($_POST['operation'])){
             die('Select Error (' . $stmt->errno . ') ' . $stmt->error);
             }
         else echo "Добавлено.";
+    }
+
+    if ($operation == "update")    {
+
+    	$id = $_POST['id'];
+
+    	if(($stmt->prepare("UPDATE  operation set date=? ,k_id=? , s_id=? , a_id=? , value=?,type =?  WHERE id=? ") === FALSE) 
+                    or ($stmt->bind_param('siiiiii', $date, $kagent,$state,$acount,$count,$type,$id) === FALSE)
+                    or ($stmt->execute() === FALSE)       // получение буферизированного результата в виде mysqli_result,
+                    or ($stmt->close() === FALSE)) {
+                    die('Select Error (' . $stmt->errno . ') ' . $stmt->error);
+                }
+                else echo "Изменено."; 
     }
 
     if ($operation == "get"){
@@ -99,16 +112,16 @@ if (isset($_POST['operation'])){
 		                or ($stmt->close() === FALSE)) {
 		        die('Select Error (' . $stmt->errno . ') ' . $stmt->error);
 		    }
-		    echo "<button name='add' class='bd'>Добавить</button>";   
+		    echo "<button name='add' class='bd'><span class='fontawesome-plus'></span></button>";   
 		    echo "<table>";
-		    echo "<tr><th>Дата</th><th>Значение</th><th>Тип</th><th>Контрагент</th><th>Статья</th><th>Счет</th><th>Изменить</th><th>Удалить</th></tr>";
+		    echo "<tr><th>Дата</th><th>Значение</th><th>Тип</th><th>Контрагент</th><th>Статья</th><th>Счет</th><th>.</th><th>.</th></tr>";
 		    while ($row = $result->fetch_row()) {
 		        echo "<tr>";
 		        for($i=1; $i<7; $i++){
 		            echo "<td>".$row[$i]."</td>";
 		        }
-		        echo "<td><button name='bbb' class='bd'  value='$row[0]'>изменить</button></td>";
-		        echo "<td><button name='ddd' class='bd'  value='$row[0]'>удалить</button></td>";
+		        echo "<td><button name='bbb' class='bd'  value='$row[0]'><span class='fontawesome-pencil'></span></button></td>";
+		        echo "<td><button name='ddd' class='bd'  value='$row[0]'><span class='fontawesome-trash'></span></button></td>";
 		        echo "</tr>";
 		    }
 		    echo "</table>";

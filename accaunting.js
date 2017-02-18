@@ -45,9 +45,7 @@ function initializebbb(){
 
  	//o.id,date,value,o.type,k.name,s.name,a.name,k.id,s.id,a.id
 
- 	var s = data.split(';');
-
- 	toggleform(false);
+ 	var s = data.split(';'); 	
 
  	document.getElementsByName('date')[0].value=s[1] ;
 
@@ -57,9 +55,7 @@ function initializebbb(){
 
 	document.getElementsByName('count')[0].value=s[2];
 	document.getElementsByName('type')[0].value=s[3];
-	document.getElementsByName('id')[0].value=s[0];
-
-	
+	document.getElementsByName('id')[0].value=s[0];		
 
  }
 
@@ -79,7 +75,9 @@ function initializebbb(){
 
  				if (httpreq.readyState == 4) {
  					if(httpreq.status == 200) {
-		 				var s = httpreq.responseText;          
+		 				var s = httpreq.responseText; 
+		 				toggleform(false); 
+		 				document.getElementsByName('operation')[0].value = "update";        
 		 				fillform(s);
  					}
  				} 	 
@@ -103,9 +101,10 @@ function initializebbb(){
  		}
 
  		break;
- 		case 'add':  // добавить  ,  показывает соответсвующую форму редактирования 
+ 		case 'add':  // добавить  
  			
  			toggleform(false); 
+ 			document.getElementsByName('operation')[0].value = "insert";
  			getOption(); 						
 
  		break;
@@ -161,16 +160,20 @@ document.getElementById('insert').onclick = function (){
 		kagent = document.getElementsByName('kagent')[0].value,
 		acount = document.getElementsByName('acount')[0].value,
 		count = document.getElementsByName('count')[0].value,
-		type = document.getElementsByName('type')[0].value;
+		type = document.getElementsByName('type')[0].value,
+		id = document.getElementsByName('id')[0].value,
+		operation = document.getElementsByName('operation')[0].value;
 
+	var body = "operation="+operation+"&date="+date+"&state="+state+"&kagent="+kagent+"&acount="+acount+"&count="+count+"&type="+type;
 
-	var body = "operation=insert"+"&date="+date+"&state="+state+"&kagent="+kagent+"&acount="+acount+"&count="+count+"&type="+type;
+	if (operation == "update") body += "&id="+id;
 
-	execute(body,function(){					// ========== добавление новой записи =========== //
+	execute(body,function(){					// ========== Сохранение =========== //
 
 		if (httpreq.readyState == 4) {
 		 			if(httpreq.status == 200) {	   				 			
 		 				
+		 				var s = httpreq.responseText;
 		 				getTable();
 		 				toggleform(true);
 
