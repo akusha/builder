@@ -1,5 +1,9 @@
 var httpreq = getXmlHttp();
 
+window.onload= function(){
+	getOption();        		// ============ Load options ============//
+}
+
 
 
 function toggleform(bool) {
@@ -8,32 +12,14 @@ function toggleform(bool) {
 	var fon  = document.getElementById("fon");
 
 	form.classList.toggle("invisible",bool);
-	fon.classList.toggle("fonnone",bool);
-
-	if (!bool) execute("select=1",function() {
-		 		if (httpreq.readyState == 4) {
-		 			if(httpreq.status == 200) {
-		   				 			
-		 				var s = httpreq.responseText,
-		 					a = s.split(';'),
-		 					kagent = a[0],
-		 					state  = a[1],
-		 					acount = a[2];
-
-		 				document.getElementsByName("kagent")[0].innerHTML = kagent;
-		 				document.getElementsByName("state")[0].innerHTML = state;
-		 				document.getElementsByName("acount")[0].innerHTML = acount; 	
-		 			}
-		 		}	
-
-		 		});
+	fon.classList.toggle("fonnone",bool);	
 
 }
 
 
 document.getElementById("op").onclick = function (){
 
-	getTable();
+	getTable();	
 
 }
 
@@ -61,15 +47,19 @@ function initializebbb(){
 
  	var s = data.split(';');
 
+ 	toggleform(false);
+
  	document.getElementsByName('date')[0].value=s[1] ;
-	document.getElementsByName('state')[0].value=s[8];
+
+	document.getElementsByName('state')[0].value = s[8];
 	document.getElementsByName('kagent')[0].value=s[7];
 	document.getElementsByName('acount')[0].value=s[9];
+
 	document.getElementsByName('count')[0].value=s[2];
 	document.getElementsByName('type')[0].value=s[3];
 	document.getElementsByName('id')[0].value=s[0];
 
-	toggleform(false);
+	
 
  }
 
@@ -115,12 +105,34 @@ function initializebbb(){
  		break;
  		case 'add':  // добавить  ,  показывает соответсвующую форму редактирования 
  			
- 			toggleform(false); 					
+ 			toggleform(false); 
+ 			getOption(); 						
 
  		break;
  	}
  	
  }
+
+
+function getOption(){
+	execute("select=1",function() {
+		 		if (httpreq.readyState == 4) {
+		 			if(httpreq.status == 200) {
+		   				 			
+		 				var s = httpreq.responseText,
+		 					a = s.split(';'),
+		 					kagent = a[0],
+		 					state  = a[1],
+		 					acount = a[2];
+
+		 				document.getElementsByName("kagent")[0].innerHTML = kagent;
+		 				document.getElementsByName("state")[0].innerHTML = state;
+		 				document.getElementsByName("acount")[0].innerHTML = acount; 	
+		 			}
+		 		}	
+
+		 		});		
+}
 
 function getTable(){
 
@@ -137,9 +149,7 @@ function getTable(){
 
  		} 	
 
-	})
-
-
+	});
 
 }
 
