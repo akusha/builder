@@ -1,8 +1,8 @@
-.rt:before{
+/*.rt:before{
     display: block;
 	content: "";
 	height: 110px;
-	margin: -110px 0 0;
+	margin: -110px 0 0;*/
 }
 body{
     background: url("image/fon-peper.jpeg") repeat fixed;
@@ -176,4 +176,10 @@ footer{                    /* подвал */
         clear: left;
         top: 5px;
     }
+}
+
+
+.leftmenu li:hover{
+    color: red;
+    cursor: pointer;
 }

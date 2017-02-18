@@ -71,7 +71,7 @@
 
                     </ul>
                 </li>
-                <li><a href="https://ok.ru">odnok</a></li>
+                <li><a href="accaunting.php">Бухгалтерия</a></li>
             </ul>
         </nav>
         
