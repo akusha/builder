@@ -24,22 +24,18 @@
         </header>
 
 
-
-
         <div class="forms invisible" id="form_op">
-            <form method="post">
-
-                
-					<label for="date">Дата</label><input type="date" name="date" autofocus>   
-                    <label for="state">Статья</label>	 <select name="state"></select> 
-                    <label for="state">Счет</label>		 <select name="acount"></select>
-                    <label for="state">Контрагент</label><select name="kagent"></select>
-                   	<label for="count">Сумма</label><input type="number" name="count">
-                   	<label for="type">Вид</label><select name="type"> <option>приход</option> <option>расход</option></select>
-                    <input type="hidden" name="id_op">
-                    <input type="button" value="сохранить" id="insert">
-                    <input type="button" value="изменить" id="update" class="invisible">
-                    <input type="button" value="закрыть" id="close">
+            <form method="post">                
+				<label for="date">Дата</label><input type="date" name="date" autofocus>   
+                <label for="state">Статья</label>	 <select name="state"></select> 
+                <label for="state">Счет</label>		 <select name="acount"></select>
+                <label for="state">Контрагент</label><select name="kagent"></select>
+               	<label for="count">Сумма</label><input type="number" name="count">
+               	<label for="type">Вид</label><select name="type"> <option value="1">приход</option> <option value="-1">расход</option></select>
+                <input type="hidden" name="id">
+                <input type="button" value="сохранить" id="insert">
+                <input type="button" value="изменить" id="update" class="invisible">
+                <input type="button" value="закрыть" id="close">
             </form>
         </div>
 
@@ -72,7 +68,7 @@
 			
         </footer>
 
-<script src="accaunting.js"/></script>
+	<script src="accaunting.js"/></script>
       
     </body>
 </html>
