@@ -80,9 +80,7 @@ function dKuk(){		// Удаление куки.
  			switch (currenttable) {
  				case 'workers':workers.classList.remove('invisible');break;
  				case 'objects':obgects.classList.remove('invisible');break;
- 				case 'jobs':;break;
  			} 			
- 		break;
  	}
  }
 

@@ -1,0 +1,104 @@
+@charset "utf-8";
+/* CSS Document */
+
+@import url(http://weloveiconfonts.com/api/?family=fontawesome);
+
+/* ---------- FONTAWESOME ---------- */
+
+[class*="fontawesome-"]:before {
+  font-family: 'FontAwesome', sans-serif;
+}
+
+
+body{
+    background-color: #50654e;
+	color: #394048;
+	font-family: 'Open Sans', Arial, sans-serif;
+	font-size: 14px;
+	margin: 0;
+	padding: 0;
+	/*line-height: 1.5em;*/
+}
+
+label {
+    width: 150px;
+    height: 20px;
+    display: block;
+    float: left;
+    margin-left: 0; 
+}
+input[type="text"], input[type="number"], select {
+    display: block;
+    height: 20px;
+    width: 220px;
+}
+input[type="button"]{
+
+}
+input[type="text"]:after, input[type="number"]:after, select:after {
+	content: "";
+	display: block;
+	height: 0;
+	clear: left;
+}
+
+form {
+    position: fixed;
+    width: 380px;
+    top: 50%;
+    left: 50%;
+    margin-left: -250px;
+    margin-top: -150px;  
+    background: green;
+    padding: 7px;
+    z-index: 100;
+    /*text-align: center;*/
+}
+.invisible{
+    visibility: hidden;
+}
+
+.fon{
+	position: fixed;
+	width: 100%;
+	height: 100%;		
+	opacity: 0.3;
+	z-index: 13;
+	background: green;
+
+}
+
+.fonnone{
+	display: none;
+}
+.forms {
+	z-index: 101;
+}
+
+
+
+
+table {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+  font-size: 14px;
+  background: white;
+  max-width: 100%;
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+th {
+  font-weight: normal;
+  color: #039;
+  border-bottom: 2px solid #6678b1;
+  padding: 10px 8px;
+}
+td {
+	border-bottom: 1px solid #ccc;
+  color: #669;
+  padding: 9px 8px;
+  transition: .3s linear;
+}
+tr:hover td{
+  color: #6699ff;
+}

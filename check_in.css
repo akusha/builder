@@ -59,9 +59,9 @@ input[type="text"], input[type="password"], input[type="email"] {
     color: #7582c7;
 }
 input[type="submit"] {
-	border-radius: 3px;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
+	border-radius: 9px;
+	-moz-border-radius: 9px;
+	-webkit-border-radius: 9px;
 	background-color: #336a31;
 	font-weight: bold;
 	margin-bottom: 2em;

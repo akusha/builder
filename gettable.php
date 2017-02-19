@@ -55,7 +55,7 @@ if (isset($_POST['id'])){
     while ($row = $result->fetch_row()) {
         echo "<tr>";
         for($i=0; $i<$field_cnt; $i++){
-            echo "<td>".$row[$i]."<td>";
+            echo "<td>".$row[$i]."</td>";
         }
         echo "<td><button name='bbb' class='bd'  value='$row[0]'>изменить</button></td>";
         echo "<td><button name='ddd' class='bd'  value='$row[0]'>удалить</button></td>";
