@@ -1,3 +1,15 @@
+@charset "utf-8";
+/* CSS Document */
+
+@import url(http://weloveiconfonts.com/api/?family=fontawesome);
+
+/* ---------- FONTAWESOME ---------- */
+
+[class*="fontawesome-"]:before {
+  font-family: 'FontAwesome', sans-serif;
+}
+
+
 body{
     background-color: #50654e;
 	color: #394048;

@@ -20,7 +20,14 @@
     <div id="fon" class="fon fonnone"></div>
    
         <header class="header">
-            <a href="http://localhost"><img src="image/logo_100_100.png" class="logo"/></a>           
+            <a href="http://localhost"><img src="image/logo_100_100.png" class="logo"/></a>    
+            <nav>
+            <ul class = "topmenu">               
+                <li><a href="accaunting.php">Бухгалтерия</a></li>
+                <li><a href="cabinet.php">Кабинет</a></li>
+
+            </ul>
+        </nav>       
         </header>
 
 
@@ -33,8 +40,8 @@
                	<label for="count">Сумма</label><input type="number" name="count">
                	<label for="type">Вид</label><select name="type"> <option value="1">приход</option> <option value="-1">расход</option></select>
                 <input type="hidden" name="id">
+                <input type="hidden" name="operation">
                 <input type="button" value="сохранить" id="insert">
-                <input type="button" value="изменить" id="update" class="invisible">
                 <input type="button" value="закрыть" id="close">
             </form>
         </div>
