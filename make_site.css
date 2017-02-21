@@ -4,6 +4,7 @@
 	height: 100px;
 	background: blue;
 }
+
 .menu{
 	position: relative;
 	width: 100%;
@@ -23,6 +24,7 @@
 	z-index: 10;
 }
 
+
 .conteiner{
 	position: relative;
 	margin-left: 200px;
@@ -38,4 +40,45 @@
 }
 body{
 	margin: 0;
+}
+
+.menu{
+	position: relative;
+	width: 100%;
+	background: rgb(0, 128, 0);
+}
+nav{    
+    margin-left: 10px;    
+}
+nav ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.topmenu>li{  
+    position: relative;
+    display: inline-block;  
+    width: 10em; 
+    line-height: 46px;
+    text-align: center; 
+    padding-bottom: 4px;
+    color: aliceblue;     
+}
+.topmenu li:hover {    
+    background: rgb(3, 103, 3);    
+}
+.submenu{
+    background: rgb(5, 134, 5);
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    margin: 0;
+    top: 100%;
+    width: 150%;
+	z-index: 11;
+}
+.topmenu li:hover>.submenu{
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 1s ease-out 0s;
 }
