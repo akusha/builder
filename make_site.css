@@ -1,3 +1,19 @@
+@import url(http://weloveiconfonts.com/api/?family=fontawesome);
+
+/* ---------- FONTAWESOME ---------- */
+
+[class*="fontawesome-"]:before {
+  font-family: 'FontAwesome', sans-serif;
+ font-size: 14px;
+}
+
+img{
+	display: block;
+	width: 100%;
+	height: 100px;
+}
+
+
 .logo{
 	position: relative;
 	width: 100%;
@@ -5,24 +21,7 @@
 	background: blue;
 }
 
-.menu{
-	position: relative;
-	width: 100%;
-	height: 50px;
-	background: green;
-}
 
-.fixed{
-	position: fixed;
-	top:0;
-	z-index: 10;
-}
-
-.fixedleft{
-	position: fixed;
-	top:50px;
-	z-index: 10;
-}
 
 
 .conteiner{
@@ -32,11 +31,13 @@
 	background: red;
 }
 .left_menu{
-	position: absolute;
-	top: 153px;
+	position: fixed;
+	/*padding-top: 160px;*/
+	top: 160px;
 	bottom: 0;
-	width: 180px;
-	background: brown;
+	width: 197px;
+	background: #38214E;
+	overflow: auto;
 }
 body{
 	margin: 0;
@@ -48,37 +49,73 @@ body{
 	background: rgb(0, 128, 0);
 }
 nav{    
-    margin-left: 10px;    
+	margin-left: 10px;    
 }
 nav ul{
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
 }
 .topmenu>li{  
-    position: relative;
-    display: inline-block;  
-    width: 10em; 
-    line-height: 46px;
-    text-align: center; 
-    padding-bottom: 4px;
-    color: aliceblue;     
+	position: relative;
+	display: inline-block;  
+	width: 10em; 
+	line-height: 46px;
+	text-align: center; 
+	padding-bottom: 4px;
+	color: aliceblue;     
 }
 .topmenu li:hover {    
-    background: rgb(3, 103, 3);    
+	background: rgb(3, 103, 3);    
 }
 .submenu{
-    background: rgb(5, 134, 5);
-    position: absolute;
-    visibility: hidden;
-    opacity: 0;
-    margin: 0;
-    top: 100%;
-    width: 150%;
+	background: rgb(5, 134, 5);
+	position: absolute;
+	visibility: hidden;
+	opacity: 0;
+	margin: 0;
+	top: 100%;
+	width: 150%;
 	z-index: 11;
 }
 .topmenu li:hover>.submenu{
-    visibility: visible;
-    opacity: 1;
-    transition: opacity 1s ease-out 0s;
+	visibility: visible;
+	opacity: 1;
+	transition: opacity 1s ease-out 0s;
+}
+
+#new_item{
+	/*visibility: hidden;*/
+	display: none;
+	width: 50px;
+}
+
+
+.fixed{
+	position: fixed;
+	top:0;
+	z-index: 10;
+}
+
+.fixedleft{
+	position: fixed;
+	top:50px;
+}
+
+@media screen and (max-width: 900px) {
+
+	.conteiner{
+	
+		margin-left: 0px;
+	
+	}
+	.left_menu{
+		visibility: hidden;
+	}
+
+	#new_item{
+		/*visibility: visible;*/
+		display: inline-block;
+	}
+	
 }

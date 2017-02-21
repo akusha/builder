@@ -9,12 +9,13 @@
     </head>
     <body>
     	<div class="logo">
-			
+			<img src="image/logo.jpg">
     	</div>
     	
     	<div class="menu">
 			<nav>
 				<ul class = "topmenu">
+                    <li id="new_item" class="fontawesome-reorder"></li>
 					<li>Наши проекты 
 						<ul id="tables" class = "submenu">
 							<li id="workers">Строительная фирма</li>
@@ -29,6 +30,11 @@
     	
     	<div class="conteiner">
 			<h2 id="showScroll">  </h2>
+            <p> ghlkshgslkdhjglshdg 
+            fgl kjgldfhgl sdg
+            sgjkdfglkdfjghw
+            gwdgjkbdfgkjregggbhdfbgs
+             </p>
     	</div>
 
 
