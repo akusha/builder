@@ -23,7 +23,7 @@
             <a href="http://localhost"><img src="image/logo_100_100.png" class="logo"/></a>    
             <nav>
             <ul class = "topmenu">               
-                <li><a href="accaunting.php">Бухгалтерия</a></li>
+               <!--  <li><a href="accaunting.php">Бухгалтерия</a></li> -->
                 <li><a href="cabinet.php">Кабинет</a></li>
 
             </ul>
@@ -56,15 +56,17 @@
 
 				<ul class="leftmenu">
 					<li id = "op">Операции</li>
-					<li id = "st" >Статьи</li>
+					<li id = "st">Статьи</li>
 					<li id = "ac">Счета</li>
 					<li id = "ka">Контрагенты</li>
 				</ul>
                 
             </div>
-            <div class="rightcol" id="table"> 
+            <div class="rightcol" > 
+            	<h2></h2>
+				<div id="table"> 
 
-                
+				</div>                
             </div>
         </div>
         <footer>

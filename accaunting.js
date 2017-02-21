@@ -2,6 +2,24 @@ var httpreq = getXmlHttp();
 
 window.onload= function(){
 	getOption();        		// ============ Load options ============//
+
+	var lis = document.getElementsByClassName('leftmenu')[0].getElementsByTagName('li');
+
+	for (var i=0;i<lis.length;i++)
+		lis[i].onclick = menuClick;
+}
+
+function menuClick(){
+
+	var menu_id = this.id;
+	document.getElementsByClassName('rightcol')[0].getElementsByTagName('h2')[0].innerHTML=this.innerHTML;
+	switch (menu_id) {
+		case "op":getTable();break;
+		case "st":getKAS("state"); break;
+		case "ac":getKAS("acount");break;
+		case "ka":getKAS("kagent");break;
+	}
+
 }
 
 
@@ -16,12 +34,6 @@ function toggleform(bool) {
 
 }
 
-
-document.getElementById("op").onclick = function (){
-
-	getTable();	
-
-}
 
 document.getElementById("close").onclick = function (){
 
@@ -102,11 +114,8 @@ function initializebbb(){
 
  		break;
  		case 'add':  // добавить  
- 			
  			toggleform(false); 
  			document.getElementsByName('operation')[0].value = "insert";
- 			getOption(); 						
-
  		break;
  	}
  	
@@ -132,6 +141,26 @@ function getOption(){
 
 		 		});		
 }
+
+function getKAS(tablename){
+
+	var table = document.getElementById('table'),
+		body = "table="+tablename;
+
+	execute(body,function(){
+
+ 		if (httpreq.readyState == 4) {
+ 			if(httpreq.status == 200) {
+ 				table.innerHTML = httpreq.responseText;          
+ 				initializebbb();
+ 			}
+
+ 		} 	
+
+	});
+
+}
+
 
 function getTable(){
 

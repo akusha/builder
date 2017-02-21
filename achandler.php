@@ -2,6 +2,8 @@
 
 include "conectSQL.php";
 
+
+// =============== Загрузка списоков для формы из таблиц acount,kagent,state ====================//
 if (isset($_POST['select'])) {
 
 	$sql = "select 'kagent' as t,id, name,rec from kagent 
@@ -11,7 +13,7 @@ if (isset($_POST['select'])) {
     $stmt = $mysqli->stmt_init();
     if(($stmt->prepare($sql) === FALSE)
                // or ($stmt->bind_param('s', $table) === FALSE)
-                or ($stmt->execute() === FALSE)       // получение буферизированного результата в виде mysqli_result,
+                or ($stmt->execute() === FALSE)       
                 or (($result = $stmt->get_result()) === FALSE)
                 or ($stmt->close() === FALSE)) {
         die('Select Error (' . $stmt->errno . ') ' . $stmt->error);}
@@ -31,8 +33,11 @@ if (isset($_POST['select'])) {
         echo $kagent.";".$state.";".$acount;
     }
 
-}
+}	//=========== Конец заугрзки списков ==================================//
 
+
+
+//======================== Работа с таблицей operation: загрузка, добавление, изменени и удаление записей ==============//
 
 if (isset($_POST['operation'])){
 
@@ -47,30 +52,33 @@ if (isset($_POST['operation'])){
 
 	$stmt = $mysqli->stmt_init(); 
 
+	//============ INSERT ===========//
     if ($operation == "insert"){    	
 	          
         if(($stmt->prepare("INSERT INTO operation (date,k_id,s_id,a_id,value,type) VALUES (?,?,?,?,?,?)") === FALSE) 
             or ($stmt->bind_param('siiiii', $date, $kagent,$state,$acount,$count,$type) === FALSE)
-            or ($stmt->execute() === FALSE)       // получение буферизированного результата в виде mysqli_result,
+            or ($stmt->execute() === FALSE)      
             or ($stmt->close() === FALSE)) {
             die('Select Error (' . $stmt->errno . ') ' . $stmt->error);
             }
         else echo "Добавлено.";
     }
 
+    //========== UPDATE =============//
     if ($operation == "update")    {
 
     	$id = $_POST['id'];
 
     	if(($stmt->prepare("UPDATE  operation set date=? ,k_id=? , s_id=? , a_id=? , value=?,type =?  WHERE id=? ") === FALSE) 
                     or ($stmt->bind_param('siiiiii', $date, $kagent,$state,$acount,$count,$type,$id) === FALSE)
-                    or ($stmt->execute() === FALSE)       // получение буферизированного результата в виде mysqli_result,
+                    or ($stmt->execute() === FALSE)      
                     or ($stmt->close() === FALSE)) {
                     die('Select Error (' . $stmt->errno . ') ' . $stmt->error);
                 }
                 else echo "Изменено."; 
     }
 
+    //============ GET ============//
     if ($operation == "get"){
 
   
@@ -85,7 +93,7 @@ if (isset($_POST['operation'])){
 		    $stmt = $mysqli->stmt_init();
 		    if(($stmt->prepare($sql) === FALSE)
 		               // or ($stmt->bind_param('s', $table) === FALSE)
-		                or ($stmt->execute() === FALSE)       // получение буферизированного результата в виде mysqli_result,
+		                or ($stmt->execute() === FALSE)      
 		                or (($result = $stmt->get_result()) === FALSE)
 		                or ($stmt->close() === FALSE)) {
 		        die('Select Error (' . $stmt->errno . ') ' . $stmt->error);
@@ -107,19 +115,19 @@ if (isset($_POST['operation'])){
 		    $stmt = $mysqli->stmt_init();
 		    if(($stmt->prepare($sql) === FALSE)
 		               // or ($stmt->bind_param('s', $table) === FALSE)
-		                or ($stmt->execute() === FALSE)       // получение буферизированного результата в виде mysqli_result,
+		                or ($stmt->execute() === FALSE)       
 		                or (($result = $stmt->get_result()) === FALSE)
 		                or ($stmt->close() === FALSE)) {
 		        die('Select Error (' . $stmt->errno . ') ' . $stmt->error);
 		    }
-		    echo "<button name='add' class='bd'><span class='fontawesome-plus'></span></button>";   
+		    // echo "<button name='add' class='bd'><span class='fontawesome-plus'></span></button>";   
 		    echo "<table>";
-		    echo "<tr><th>Дата</th><th>Значение</th><th>Тип</th><th>Контрагент</th><th>Статья</th><th>Счет</th><th>.</th><th>.</th></tr>";
+		    echo "<tr><th>Дата</th><th>Значение</th><th>Тип</th><th>Контрагент</th><th>Статья</th><th>Счет</th><th><button name='add' class='bd'><span class='fontawesome-plus'></span></button></th><th>.</th></tr>";
 		    while ($row = $result->fetch_row()) {
 		        echo "<tr>";
 		        for($i=1; $i<7; $i++){
 		            echo "<td>".$row[$i]."</td>";
-		        }
+		        }		        
 		        echo "<td><button name='bbb' class='bd'  value='$row[0]'><span class='fontawesome-pencil'></span></button></td>";
 		        echo "<td><button name='ddd' class='bd'  value='$row[0]'><span class='fontawesome-trash'></span></button></td>";
 		        echo "</tr>";
@@ -127,10 +135,9 @@ if (isset($_POST['operation'])){
 		    echo "</table>";
 		}
 
-
     }
 
-
+    // ======================= DELETE ================== //
     if ($operation == "delete"){
 
     	$id = $_POST['id'];
@@ -139,7 +146,7 @@ if (isset($_POST['operation'])){
 
         if(($stmt->prepare($sql) === FALSE) 
             //or ($stmt->bind_param('s',$id) === FALSE)
-            or ($stmt->execute() === FALSE)       // получение буферизированного результата в виде mysqli_result,
+            or ($stmt->execute() === FALSE)       
             or ($stmt->close() === FALSE)) {
             die('Select Error (' . $stmt->errno . ') ' . $stmt->error);
 	    }
@@ -147,6 +154,40 @@ if (isset($_POST['operation'])){
 
 
     }
+
+
+}	//======================== Конец работы с таблицей operation ==============//
+
+
+if (isset($_POST['table'])){
+
+	$table = $_POST['table'];
+
+	$stmt = $mysqli->stmt_init(); 
+
+	$sql = "SELECT * FROM ".$table;
+	echo $sql;
+
+	if(($stmt->prepare($sql) === FALSE)
+		               // or ($stmt->bind_param('s', $table) === FALSE)
+		                or ($stmt->execute() === FALSE)       
+		                or (($result = $stmt->get_result()) === FALSE)
+		                or ($stmt->close() === FALSE)) {
+		        die('Select Error (' . $stmt->errno . ') ' . $stmt->error);
+		    }
+
+    echo "<table>";
+    echo "<tr><th>Наименовение</th><th>Значение</th><th><button name='add' class='bd'><span class='fontawesome-plus'></span></button></th><th>.</th></tr>";
+    while ($row = $result->fetch_row()) {
+        echo "<tr>";
+        for($i=1; $i<3; $i++){
+            echo "<td>".$row[$i]."</td>";
+        }		        
+        echo "<td><button name='bbb' class='bd'  value='$row[0]'><span class='fontawesome-pencil'></span></button></td>";
+        echo "<td><button name='ddd' class='bd'  value='$row[0]'><span class='fontawesome-trash'></span></button></td>";
+        echo "</tr>";
+    }
+    echo "</table>";
 
 
 }
