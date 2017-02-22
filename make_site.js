@@ -34,3 +34,7 @@ document.getElementById('new_item').onclick = function (){
 		document.getElementById("visib").classList.add('visib');
 }
 
+window.onresize = function() {
+	document.getElementById("widhei").innerHTML = document.documentElement.clientWidth;
+}
+

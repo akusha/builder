@@ -6,28 +6,36 @@
   font-family: 'FontAwesome', sans-serif;
  font-size: 14px;
 }
-
 .visib{
 		visibility: visible;
 }
-
-img{
-	display: block;
-	width: 100%;
-	height: 100px;
-}
-
-
 .logo{
+	background: linear-gradient(to right, #060e71, #abaef2);
 	position: relative;
 	width: 100%;
 	height: 100px;
-	background: blue;
+	font-family: Geneva, Arial, Helvetica, sans-serif;
 }
-
-
-
-
+.log1{
+	position: absolute;
+	padding-left: 20px;
+	left: 0;
+	width: 300px;
+}
+.log2{
+	position: absolute;
+	padding-right: 20px;
+	right: 0;
+	width: 250px;
+	font-size: 16pt;
+	font-style: italic;
+	color: aliceblue;
+}
+.span{
+	font-weight: bold;
+	font-size: 60pt;
+	color: aliceblue;
+}
 .conteiner{
 	position: relative;
 	margin-left: 200px;
@@ -36,7 +44,6 @@ img{
 	background: #f3e7e7;
 	padding-top: 20px;
 }
-
 .left_menu{
 	position: fixed;
 	top: 150px;
@@ -63,7 +70,7 @@ nav ul{
 .topmenu>li{  
 	position: relative;
 	display: inline-block;  
-	width: 10em; 
+	width: 7em; 
 	line-height: 46px;
 	text-align: center; 
 	padding-bottom: 4px;
@@ -95,34 +102,26 @@ nav ul{
 	display: none;
 	width: 50px;
 }
-
-
 .fixed{
 	position: fixed;
 	top:0;
 	z-index: 10;
 }
-
 .fixedleft{
 	position: fixed;
 	top:50px;
 }
 
 @media screen and (max-width: 900px) {
-
 	.conteiner{
-	
 		margin-left: 0px;
-	
 	}
 	.visib{
 		visibility: hidden;
 	}
-
 	#new_item{
 		/*visibility: visible;*/
 		display: inline-block;
 	}
-	
 }
 
