@@ -16,11 +16,12 @@
 			<nav>
 				<ul class = "topmenu">
                     <li id="new_item" class="fontawesome-reorder"></li>
+                    <li id="main" class="fontawesome-home"></li>
 					<li>Наши проекты 
 						<ul id="tables" class = "submenu">
-							<li id="workers">Строительная фирма</li>
-							<li id="objects">Рекламный сайт</li>
-							<li id="jobs">Финансовый учет</li>
+							<li>Строительная фирма</li>
+							<li>Рекламный сайт</li>
+							<li>Финансовый учет</li>
 						</ul>
 					</li>
 					<li>Контакты</li>
@@ -39,7 +40,7 @@
 
 
 
-    	<div class="left_menu">
+    	<div class="left_menu visib" id="visib">
 			
     	</div>
 

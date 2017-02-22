@@ -9,18 +9,18 @@ window.onscroll = function() {
 	// left_menu.classList.toggle('fixedleft',scrolled>=100);
 
 	if (scrolled<=100){
-		left_menu.style.top= 153-scrolled+'px';
+		left_menu.style.top= 150-scrolled+'px';
 	}else 
-		left_menu.style.top = 53+'px';
-
-	document.getElementById('showScroll').innerHTML = scrolled + 'px';
+		left_menu.style.top = 50+'px';	
 }
+
+
 
 
 var bool = false;
 var s = "";
 
-for (var i=0;i<100;i++) {
+for (var i=0;i<25;i++) {
 	s += "<li>" + i + " hglhgldfkjggh </li>";
 }
 
@@ -29,8 +29,8 @@ left_menu.innerHTML = s;
 document.getElementById('new_item').onclick = function (){
 
 	if (bool = !bool)
-		left_menu.style.visibility = 'visible';
+		document.getElementById("visib").classList.remove('visib');
 	else
-		left_menu.style.visibility = 'hidden';
-
+		document.getElementById("visib").classList.add('visib');
 }
+
