@@ -12,23 +12,14 @@
         <link rel="shortcut icon" href="image/logo_100_100.png" type="image/x-icon">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="utf-8">
-        <link rel="stylesheet" href="cabinet.css">        
+        <!-- <link rel="stylesheet" href="cabinet.css">         -->
         <link rel="stylesheet" href="accaunting.css">        
     </head>
 
     <body>        
     <div id="fon" class="fon fonnone"></div>
    
-        <header class="header">
-            <a href="http://localhost"><img src="image/logo_100_100.png" class="logo"/></a>    
-            <nav>
-            <ul class = "topmenu">               
-               <!--  <li><a href="accaunting.php">Бухгалтерия</a></li> -->
-                <li><a href="cabinet.php">Кабинет</a></li>
-
-            </ul>
-        </nav>       
-        </header>
+        
 
 
         <div class="forms invisible" id="form_op">
@@ -47,12 +38,55 @@
         </div>
 
 
-        <div class='login'><a href='cabinet.php'><?php echo $_COOKIE['log'];  ?></a>/
+<!--         <div class='login'><a href='cabinet.php'><?php echo $_COOKIE['log'];  ?></a>/
 			<a href="index.php" onclick="dKuk()"> выход </a>
-        </div>
+        </div> -->
 
-        <div class="container">
-            <div class="leftcol">
+		<div class="logo">
+			<div class ="log1">
+				<span class="span">hedbed.ru</span>
+			</div>
+			
+			<div class="log2">
+				<p>тел. 8(965)345-45-45</p>
+			</div>
+    	</div>
+
+		<div class="menu">
+			<nav>
+				<ul class = "topmenu">
+                    <li id="new_item" class="fontawesome-reorder"></li>
+                    <li id="main" class="fontawesome-home"></li>
+					<li id="other" class="fontawesome-caret-down"></li>
+					
+<!--
+					<li>Наши проекты 
+						<ul id="tables" class = "submenu">
+							<li>Строительная фирма</li>
+							<li>Рекламный сайт</li>
+							<li>Финансовый учет</li>
+						</ul>
+					</li>
+-->
+					<li><span>разработка сайтов</span></li>
+					<li><span>раскрутка инстаграмм</span></li>
+					<li><span>реклама в интеренете</span></li>
+					<li><span>привлечение клиентов</span></li>
+					<li><span>маркетинг</span></li>
+					<li><span>брендинг</span></li>
+					<li><span>контакты</span></li>
+					<li><span><a href='cabinet.php'><?php echo $_COOKIE['log'];  ?></a>/
+								<a href="index.php" onclick="dKuk()"> выход </a></span></li>
+					
+					
+				</ul>
+			</nav>
+    	</div>
+
+
+    
+
+            <div class="left_menu visib" id="visib">
 
 				<ul class="leftmenu">
 					<li id = "op">Операции</li>
@@ -62,20 +96,16 @@
 				</ul>
                 
             </div>
-            <div class="rightcol" > 
+
+            <div class="conteiner">
             	<h2></h2>
 				<div id="table"> 
 
 				</div>                
             </div>
-        </div>
-        <footer>
-        <div>
-            <a href="mailto:akusha260@gmail.com?subject=вопрос к администратору">&#9993 вопрос к админ.</a>
-            Магомедов Магомед Кадиевич.
-        </div>
-			
-        </footer>
+
+        
+
 
 	<script src="accaunting.js"/></script>
       

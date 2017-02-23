@@ -1,3 +1,33 @@
+var menu = document.getElementsByClassName('menu')[0],
+	left_menu = document.getElementsByClassName('left_menu')[0],
+	bool = false;
+
+
+window.onscroll = function() {
+	var scrolled = window.pageYOffset || document.documentElement.scrollTop;
+
+	menu.classList.toggle('fixed',scrolled>=100);
+
+	if (scrolled<=100){
+		left_menu.style.top= 150-scrolled+'px';
+	}else 
+		left_menu.style.top = 50+'px';	
+}
+
+
+document.getElementById('new_item').onclick = function (){
+
+	if (bool = !bool)
+		document.getElementById("visib").classList.remove('visib');
+	else
+		document.getElementById("visib").classList.add('visib');
+}
+
+
+
+
+
+
 var httpreq = getXmlHttp();
 
 window.onload= function(){
@@ -12,7 +42,7 @@ window.onload= function(){
 function menuClick(){
 
 	var menu_id = this.id;
-	document.getElementsByClassName('rightcol')[0].getElementsByTagName('h2')[0].innerHTML=this.innerHTML;
+	document.getElementsByClassName('conteiner')[0].getElementsByTagName('h2')[0].innerHTML=this.innerHTML;
 	switch (menu_id) {
 		case "op":getTable();break;
 		case "st":getKAS("state"); break;
