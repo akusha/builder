@@ -1,6 +1,14 @@
 var menu = document.getElementsByClassName('menu')[0],
 	left_menu = document.getElementsByClassName('left_menu')[0],
+	conteiner = document.getElementsByClassName('conteiner')[0],
 	bool = false;
+
+
+function dKuk(){		// Удаление куки.
+    var cookie_date = new Date();  // Текущая дата и время
+  	cookie_date.setTime ( cookie_date.getTime() - 10000 );
+  	document.cookie = "log=; expires=" + cookie_date.toGMTString();
+ }   
 
 
 window.onscroll = function() {
@@ -10,8 +18,11 @@ window.onscroll = function() {
 
 	if (scrolled<=100){
 		left_menu.style.top= 150-scrolled+'px';
-	}else 
+		conteiner.style.paddingTop = 20 +'px';
+	}else {
 		left_menu.style.top = 50+'px';	
+		conteiner.style.paddingTop = 70  + 'px';
+	}
 }
 
 
@@ -101,18 +112,36 @@ function initializebbb(){
 
  }
 
+
+ function getTRItems(tr){
+
+ 	var s = "";
+ 	var tds = tr.childNodes;
+
+ 	for (var i=0;i<tds.length-3;i++) s += tds[i].innerHTML + ";";
+
+ 	s += tds[i].innerHTML;
+
+ 	return s;
+
+ }
+
+var currentTR;
+
  function bdclick() 		//============ Обработчик кнопок; Добавить,Изменить,Удалить ================
- {
+ { 	
  	
  	var id = this.value; 
  	var name = this.getAttribute('name');
-
+ 	
+ 	currentTR = this.parentElement.parentElement;
  	document.getElementsByName('id')[0].value = id; 
 
 
  	switch (name) {   
 
- 		case 'bbb':   // изменить 						
+ 		case 'bbb':   // изменить 	
+
  			execute("operation=get&id="+id,function(){
 
  				if (httpreq.readyState == 4) {
@@ -134,8 +163,10 @@ function initializebbb(){
 
  				if (httpreq.readyState == 4) {
  					if(httpreq.status == 200) {
-		 				var s = httpreq.responseText;          
-		 				getTable();
+		 				var s = httpreq.responseText;   
+		 				if (s=="Удалено"){       
+		 					currentTR.parentElement.removeChild(tr);
+		 				}	
  					}
  				} 	 				
 
@@ -212,6 +243,21 @@ function getTable(){
 }
 
 
+function createTR(s){			// ====== Добавление новой строки в таблицу ======== //
+
+	var tbody = document.getElementsByTagName('tbody')[0];
+	var tr = document.createElement('tr');
+	
+	tr.innerHTML = s;
+
+	if (tbody.firstChild) tbody.insertBefore(tr,tbody.firstChild); 
+	else tbody.appendChild(tr);
+
+	return tr;
+	
+}
+
+
 document.getElementById('insert').onclick = function (){			
 
 	var date = document.getElementsByName('date')[0].value,
@@ -232,12 +278,20 @@ document.getElementById('insert').onclick = function (){
 		if (httpreq.readyState == 4) {
 		 			if(httpreq.status == 200) {	   				 			
 		 				
-		 				var s = httpreq.responseText;
-		 				getTable();
-		 				toggleform(true);
 
-		 			}
-		 		}	
+		 				var s =  httpreq.responseText.split(';');
+		 			
+		 				if (s[0] >= 1)	{	 						 				
+			 				if (operation == "insert"){		 					
+			 					currentTR = createTR(s[1]);
+			 				}else {
+			 					currentTR.innerHTML = s[1];
+			 				}
+			 				toggleform(true);
+			 				initializebbb();
+			 				}
+		 				}		 				
+		 			}		 			
 	})	
 
 }

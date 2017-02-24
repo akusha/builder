@@ -61,7 +61,37 @@ if (isset($_POST['operation'])){
             or ($stmt->close() === FALSE)) {
             die('Select Error (' . $stmt->errno . ') ' . $stmt->error);
             }
-        else echo "Добавлено.";
+        else {
+        	$id = $mysqli->insert_id;
+
+        	$sql = "SELECT o.id,date,value,o.type,k.name,s.name,a.name,k.id,s.id,a.id  FROM operation as o
+					JOIN kagent as k on o.k_id = k.id
+					JOIN state as s on o.s_id = s.id
+					JOIN acount as a on o.a_id = a.id
+					WHERE o.id=".$id;
+
+		    $stmt = $mysqli->stmt_init();
+		    if(($stmt->prepare($sql) === FALSE)
+		               // or ($stmt->bind_param('s', $table) === FALSE)
+		                or ($stmt->execute() === FALSE)      
+		                or (($result = $stmt->get_result()) === FALSE)
+		                or ($stmt->close() === FALSE)) {
+		        die('Select Error (' . $stmt->errno . ') ' . $stmt->error);
+		    }
+
+		    $row = $result->fetch_row();
+
+		    $tr = "<tr>";
+		    
+	        for($i=1; $i<7; $i++){
+	            $tr .= "<td>".$row[$i]."</td>";
+	        }		        
+	        $tr .= "<td><button name='bbb' class='bd'  value='$row[0]'><span class='fontawesome-pencil'></span></button></td>
+	        <td><button name='ddd' class='bd'  value='$row[0]'><span class='fontawesome-trash'></span></button></td></tr>";
+
+	        echo $id.";".$tr;
+
+        }
     }
 
     //========== UPDATE =============//
@@ -75,7 +105,36 @@ if (isset($_POST['operation'])){
                     or ($stmt->close() === FALSE)) {
                     die('Select Error (' . $stmt->errno . ') ' . $stmt->error);
                 }
-                else echo "Изменено."; 
+                else {
+                	
+                	$sql = "SELECT o.id,date,value,o.type,k.name,s.name,a.name,k.id,s.id,a.id  FROM operation as o
+					JOIN kagent as k on o.k_id = k.id
+					JOIN state as s on o.s_id = s.id
+					JOIN acount as a on o.a_id = a.id
+					WHERE o.id=".$id;
+
+				    $stmt = $mysqli->stmt_init();
+				    if(($stmt->prepare($sql) === FALSE)
+				               // or ($stmt->bind_param('s', $table) === FALSE)
+				                or ($stmt->execute() === FALSE)      
+				                or (($result = $stmt->get_result()) === FALSE)
+				                or ($stmt->close() === FALSE)) {
+				        die('Select Error (' . $stmt->errno . ') ' . $stmt->error);
+				    }
+
+				    $row = $result->fetch_row();
+
+				    $tr = "<tr>";
+				    
+			        for($i=1; $i<7; $i++){
+			            $tr .= "<td>".$row[$i]."</td>";
+			        }		        
+			        $tr .= "<td><button name='bbb' class='bd'  value='$row[0]'><span class='fontawesome-pencil'></span></button></td>
+			        <td><button name='ddd' class='bd'  value='$row[0]'><span class='fontawesome-trash'></span></button></td></tr>";
+
+			        echo $id.";".$tr;
+
+                } 
     }
 
     //============ GET ============//
@@ -121,8 +180,8 @@ if (isset($_POST['operation'])){
 		        die('Select Error (' . $stmt->errno . ') ' . $stmt->error);
 		    }
 		    // echo "<button name='add' class='bd'><span class='fontawesome-plus'></span></button>";   
-		    echo "<table>";
-		    echo "<tr><th>Дата</th><th>Значение</th><th>Тип</th><th>Контрагент</th><th>Статья</th><th>Счет</th><th><button name='add' class='bd'><span class='fontawesome-plus'></span></button></th><th>.</th></tr>";
+		    echo "<table><thead>";
+		    echo "<tr><th>Дата</th><th>Значение</th><th>Тип</th><th>Контрагент</th><th>Статья</th><th>Счет</th><th><button name='add' class='bd'><span class='fontawesome-plus'></span></button></th><th>.</th></tr></thead><tbody>";
 		    while ($row = $result->fetch_row()) {
 		        echo "<tr>";
 		        for($i=1; $i<7; $i++){
@@ -132,7 +191,7 @@ if (isset($_POST['operation'])){
 		        echo "<td><button name='ddd' class='bd'  value='$row[0]'><span class='fontawesome-trash'></span></button></td>";
 		        echo "</tr>";
 		    }
-		    echo "</table>";
+		    echo "</tbody></table>";
 		}
 
     }
@@ -150,7 +209,7 @@ if (isset($_POST['operation'])){
             or ($stmt->close() === FALSE)) {
             die('Select Error (' . $stmt->errno . ') ' . $stmt->error);
 	    }
-	    else echo "Удалено.";  
+	    else echo "Удалено";  
 
 
     }

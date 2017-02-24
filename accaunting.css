@@ -81,6 +81,16 @@ li>span{
 	display: table-cell;
 	vertical-align: middle;
 }
+
+li a{
+	color: aliceblue;
+	text-decoration: none; 
+}
+
+li.login,.exit{
+	float: right;
+}
+
 .submenu{
 	background: rgb(5, 134, 5);
 	position: absolute;
@@ -121,6 +131,7 @@ li>span{
 	height: 2100px;
 	background: #f3e7e7;
 	padding-top: 20px;
+	padding:5px;
 }
 
 /*======================================== END CONTENT ======================================*/
@@ -135,8 +146,22 @@ li>span{
 	width: 200px;
 	background: #5c817b;
 	overflow: auto;
-	z-index: 1;
+	z-index: 1;	
 }
+
+.leftmenu{
+	list-style-type: none;
+}
+
+.leftmenu li{
+
+}
+
+.leftmenu li:hover{
+	color:green;
+	cursor: pointer;
+}
+
 .fixedleft{
 	position: fixed;
 	top:50px;
@@ -155,6 +180,7 @@ li>span{
 		/*visibility: visible;*/
 		display: inline-block;
 	}
+
 }
 
 

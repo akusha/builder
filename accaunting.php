@@ -21,9 +21,9 @@
    
         
 
-
+			<!-- ================ Форма для таблицы operation =================== -->
         <div class="forms invisible" id="form_op">
-            <form method="post">                
+            <form >                
 				<label for="date">Дата</label><input type="date" name="date" autofocus>   
                 <label for="state">Статья</label>	 <select name="state"></select> 
                 <label for="state">Счет</label>		 <select name="acount"></select>
@@ -38,9 +38,7 @@
         </div>
 
 
-<!--         <div class='login'><a href='cabinet.php'><?php echo $_COOKIE['log'];  ?></a>/
-			<a href="index.php" onclick="dKuk()"> выход </a>
-        </div> -->
+
 
 		<div class="logo">
 			<div class ="log1">
@@ -56,8 +54,7 @@
 			<nav>
 				<ul class = "topmenu">
                     <li id="new_item" class="fontawesome-reorder"></li>
-                    <li id="main" class="fontawesome-home"></li>
-					<li id="other" class="fontawesome-caret-down"></li>
+                    <li id="main" class="fontawesome-home"></li>			
 					
 <!--
 					<li>Наши проекты 
@@ -75,11 +72,30 @@
 					<li><span>маркетинг</span></li>
 					<li><span>брендинг</span></li>
 					<li><span>контакты</span></li>
-					<li><span><a href='cabinet.php'><?php echo $_COOKIE['log'];  ?></a>/
-								<a href="index.php" onclick="dKuk()"> выход </a></span></li>
+
+					<li id="other" class="fontawesome-caret-down">
+						<ul class="submenu">
+							<li><span>разработка сайтов</span></li>
+							<li><span>раскрутка инстаграмм</span></li>
+							<li><span>реклама в интеренете</span></li>
+							<li><span>привлечение клиентов</span></li>
+							<li><span>маркетинг</span></li>
+							<li><span>брендинг</span></li>
+							<li><span>контакты</span></li>
+						</ul>
+					</li>
+
+
+					<li class="exit"><span><a href="index.php" onclick="dKuk()"> выход </a></span></li>
+					<li class="login"><span><a href='cabinet.php'><?php echo $_COOKIE['log'];  ?></a></span></li>
+					
 					
 					
 				</ul>
+				<ul>
+					
+				</ul>
+
 			</nav>
     	</div>
 
