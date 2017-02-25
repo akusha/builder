@@ -3,7 +3,7 @@
 include "conectSQL.php";
 
 
-// =============== Загрузка списоков для формы из таблиц acount,kagent,state ====================//
+// =============== Загрузка списков для формы из таблиц acount,kagent,state ====================//
 if (isset($_POST['select'])) {
 
 	$sql = "select 'kagent' as t,id, name,rec from kagent 
@@ -48,15 +48,14 @@ if (isset($_POST['operation'])){
 	$acount = $_POST['acount'];
 	$state = $_POST['state'];
 	$count = $_POST['count'];
-	$type = $_POST['type'];
 
 	$stmt = $mysqli->stmt_init(); 
 
 	//============ INSERT ===========//
     if ($operation == "insert"){    	
 	          
-        if(($stmt->prepare("INSERT INTO operation (date,k_id,s_id,a_id,value,type) VALUES (?,?,?,?,?,?)") === FALSE) 
-            or ($stmt->bind_param('siiiii', $date, $kagent,$state,$acount,$count,$type) === FALSE)
+        if(($stmt->prepare("INSERT INTO operation (date,k_id,s_id,a_id,value) VALUES (?,?,?,?,?)") === FALSE) 
+            or ($stmt->bind_param('siiiii', $date, $kagent,$state,$acount,$count) === FALSE)
             or ($stmt->execute() === FALSE)      
             or ($stmt->close() === FALSE)) {
             die('Select Error (' . $stmt->errno . ') ' . $stmt->error);
@@ -64,7 +63,7 @@ if (isset($_POST['operation'])){
         else {
         	$id = $mysqli->insert_id;
 
-        	$sql = "SELECT o.id,date,value,o.type,k.name,s.name,a.name,k.id,s.id,a.id  FROM operation as o
+        	$sql = "SELECT o.id,date,value,k.name,s.name,a.name,k.id,s.id,a.id  FROM operation as o
 					JOIN kagent as k on o.k_id = k.id
 					JOIN state as s on o.s_id = s.id
 					JOIN acount as a on o.a_id = a.id
@@ -99,15 +98,15 @@ if (isset($_POST['operation'])){
 
     	$id = $_POST['id'];
 
-    	if(($stmt->prepare("UPDATE  operation set date=? ,k_id=? , s_id=? , a_id=? , value=?,type =?  WHERE id=? ") === FALSE) 
-                    or ($stmt->bind_param('siiiiii', $date, $kagent,$state,$acount,$count,$type,$id) === FALSE)
+    	if(($stmt->prepare("UPDATE  operation set date=? ,k_id=? , s_id=? , a_id=? , value=?  WHERE id=? ") === FALSE) 
+                    or ($stmt->bind_param('siiiii', $date, $kagent,$state,$acount,$count,$id) === FALSE)
                     or ($stmt->execute() === FALSE)      
                     or ($stmt->close() === FALSE)) {
                     die('Select Error (' . $stmt->errno . ') ' . $stmt->error);
                 }
                 else {
-                	
-                	$sql = "SELECT o.id,date,value,o.type,k.name,s.name,a.name,k.id,s.id,a.id  FROM operation as o
+
+                	$sql = "SELECT o.id,date,value,k.name,s.name,a.name,k.id,s.id,a.id  FROM operation as o
 					JOIN kagent as k on o.k_id = k.id
 					JOIN state as s on o.s_id = s.id
 					JOIN acount as a on o.a_id = a.id
@@ -126,7 +125,7 @@ if (isset($_POST['operation'])){
 
 				    $tr = "<tr>";
 				    
-			        for($i=1; $i<7; $i++){
+			        for($i=1; $i<6; $i++){
 			            $tr .= "<td>".$row[$i]."</td>";
 			        }		        
 			        $tr .= "<td><button name='bbb' class='bd'  value='$row[0]'><span class='fontawesome-pencil'></span></button></td>
@@ -143,7 +142,7 @@ if (isset($_POST['operation'])){
   
     	if (isset($_POST['id'])){
 
-		    $sql = "SELECT o.id,date,value,o.type,k.name,s.name,a.name,k.id,s.id,a.id  FROM operation as o
+		    $sql = "SELECT o.id,date,value,k.name,s.name,a.name,k.id,s.id,a.id  FROM operation as o
 					JOIN kagent as k on o.k_id = k.id
 					JOIN state as s on o.s_id = s.id
 					JOIN acount as a on o.a_id = a.id
@@ -166,7 +165,7 @@ if (isset($_POST['operation'])){
 
 		}else{
 
-		    $sql = "SELECT o.id,date,value,o.type,k.name,s.name,a.name,k.id,s.id,a.id  FROM operation as o
+		    $sql = "SELECT o.id,date,value,k.name,s.name,a.name,k.id,s.id,a.id  FROM operation as o
 					JOIN kagent as k on o.k_id = k.id
 					JOIN state as s on o.s_id = s.id
 					JOIN acount as a on o.a_id = a.id";
@@ -181,10 +180,10 @@ if (isset($_POST['operation'])){
 		    }
 		    // echo "<button name='add' class='bd'><span class='fontawesome-plus'></span></button>";   
 		    echo "<table><thead>";
-		    echo "<tr><th>Дата</th><th>Значение</th><th>Тип</th><th>Контрагент</th><th>Статья</th><th>Счет</th><th><button name='add' class='bd'><span class='fontawesome-plus'></span></button></th><th>.</th></tr></thead><tbody>";
+		    echo "<tr><th>Дата</th><th>Значение</th><th>Контрагент</th><th>Статья</th><th>Счет</th><th><button name='add' class='bd'><span class='fontawesome-plus'></span></button></th><th>.</th></tr></thead><tbody>";
 		    while ($row = $result->fetch_row()) {
 		        echo "<tr>";
-		        for($i=1; $i<7; $i++){
+		        for($i=1; $i<6; $i++){
 		            echo "<td>".$row[$i]."</td>";
 		        }		        
 		        echo "<td><button name='bbb' class='bd'  value='$row[0]'><span class='fontawesome-pencil'></span></button></td>";

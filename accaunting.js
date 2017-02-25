@@ -50,15 +50,26 @@ window.onload= function(){
 		lis[i].onclick = menuClick;
 }
 
+
+var currentTable = "";
+
 function menuClick(){
 
 	var menu_id = this.id;
+
+	var lis = document.getElementsByClassName('leftmenu')[0].getElementsByTagName('li');
+
+	for (var i=0;i<lis.length;i++)
+		lis[i].className = "";
+
+	this.className = "active";
+
 	document.getElementsByClassName('conteiner')[0].getElementsByTagName('h2')[0].innerHTML=this.innerHTML;
 	switch (menu_id) {
-		case "op":getTable();break;
-		case "st":getKAS("state"); break;
-		case "ac":getKAS("acount");break;
-		case "ka":getKAS("kagent");break;
+		case "op":getTable();		currentTable = "operation"; break;
+		case "st":getKAS("state");  currentTable = "state"; 	break;
+		case "ac":getKAS("acount"); currentTable = "acount"; 	break;
+		case "ka":getKAS("kagent"); currentTable = "kagent"; 	break;
 	}
 
 }
@@ -69,6 +80,12 @@ function toggleform(bool) {
 
 	var form = document.getElementById("form_op") ;
 	var fon  = document.getElementById("fon");
+	var div_op = document.getElementById("div_op");
+	var div_KAS = document.getElementById("div_KAS");
+	var isoperation = currentTable == "operation";
+	
+	div_op.classList.toggle("invisible",!isoperation);
+	div_KAS.classList.toggle("invisible",isoperation);	
 
 	form.classList.toggle("invisible",bool);
 	fon.classList.toggle("fonnone",bool);	
@@ -96,19 +113,29 @@ function initializebbb(){
 
  function fillform(data){
 
- 	//o.id,date,value,o.type,k.name,s.name,a.name,k.id,s.id,a.id
+ 	//o.id,date,value,k.name,s.name,a.name,k.id,s.id,a.id
 
  	var s = data.split(';'); 	
 
  	document.getElementsByName('date')[0].value=s[1] ;
 
-	document.getElementsByName('state')[0].value = s[8];
-	document.getElementsByName('kagent')[0].value=s[7];
-	document.getElementsByName('acount')[0].value=s[9];
+	document.getElementsByName('state')[0].value = s[7];
+	document.getElementsByName('kagent')[0].value=s[6];
+	document.getElementsByName('acount')[0].value=s[8];	
 
-	document.getElementsByName('count')[0].value=s[2];
-	document.getElementsByName('type')[0].value=s[3];
+	s[2] = parseInt(s[2]);
+	
+	document.getElementsByName('type')[0].value=getTypeOp(s[2]);
+	document.getElementsByName('count')[0].value=Math.abs(s[2]);
 	document.getElementsByName('id')[0].value=s[0];		
+
+ }
+
+
+ function getTypeOp(i){
+
+ 	if (i>=0) return 1;
+ 	else return -1;
 
  }
 
@@ -269,7 +296,12 @@ document.getElementById('insert').onclick = function (){
 		id = document.getElementsByName('id')[0].value,
 		operation = document.getElementsByName('operation')[0].value;
 
-	var body = "operation="+operation+"&date="+date+"&state="+state+"&kagent="+kagent+"&acount="+acount+"&count="+count+"&type="+type;
+		type = parseInt(type);
+		count = parseInt(count);
+
+		count *=type;
+
+	var body = "operation="+operation+"&date="+date+"&state="+state+"&kagent="+kagent+"&acount="+acount+"&count="+count;
 
 	if (operation == "update") body += "&id="+id;
 

@@ -151,15 +151,26 @@ li.login,.exit{
 
 .leftmenu{
 	list-style-type: none;
+	width: 100%;
+	padding-left: 0;
 }
 
 .leftmenu li{
-
+	display: block;
+	background: #645F5F;
+	padding-left: 40px;
+	height: 35px;
+	vertical-align: middle;
+	color: aliceblue;
 }
 
 .leftmenu li:hover{
-	color:green;
 	cursor: pointer;
+	padding-left: 60px;
+}
+
+.leftmenu li.active{
+	padding-left: 60px;
 }
 
 .fixedleft{
@@ -233,7 +244,7 @@ form {
     /*text-align: center;*/
 }
 .invisible{
-    visibility: hidden;
+    display: none;
 }
 
 .fon{

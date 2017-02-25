@@ -16,26 +16,32 @@
         <link rel="stylesheet" href="accaunting.css">        
     </head>
 
-    <body>        
-    <div id="fon" class="fon fonnone"></div>
-   
+    <body>   
+
+    <div id="fon" class="fon fonnone"></div> 
         
 
-			<!-- ================ Форма для таблицы operation =================== -->
-        <div class="forms invisible" id="form_op">
-            <form >                
+		<!-- ================ Форма для таблицы =================== -->
+    <div class="forms invisible" id="form_op">
+        <form >                
+        	<div id="div_op">
 				<label for="date">Дата</label><input type="date" name="date" autofocus>   
                 <label for="state">Статья</label>	 <select name="state"></select> 
                 <label for="state">Счет</label>		 <select name="acount"></select>
                 <label for="state">Контрагент</label><select name="kagent"></select>
                	<label for="count">Сумма</label><input type="number" name="count">
                	<label for="type">Вид</label><select name="type"> <option value="1">приход</option> <option value="-1">расход</option></select>
-                <input type="hidden" name="id">
-                <input type="hidden" name="operation">
-                <input type="button" value="сохранить" id="insert">
-                <input type="button" value="закрыть" id="close">
-            </form>
-        </div>
+           	</div>
+           	<dir id="div_KAS">
+           		<label >Название</label><input type="text" name="name">	
+           		<label >Реквизит</label><input type="text" name="rec">	
+           	</dir>
+            <input type="hidden" name="id">
+            <input type="hidden" name="operation">
+            <input type="button" value="сохранить" id="insert">
+            <input type="button" value="закрыть" id="close">
+        </form>
+    </div>
 
 
 
