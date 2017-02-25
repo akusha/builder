@@ -192,7 +192,7 @@ var currentTR;
  					if(httpreq.status == 200) {
 		 				var s = httpreq.responseText;   
 		 				if (s=="Удалено"){       
-		 					currentTR.parentElement.removeChild(tr);
+		 					currentTR.parentElement.removeChild(currentTR);
 		 				}	
  					}
  				} 	 				

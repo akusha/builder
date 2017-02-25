@@ -3,18 +3,12 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Фев 18 2017 г., 21:17
+-- Время создания: Фев 26 2017 г., 02:50
 -- Версия сервера: 5.1.62-community
 -- Версия PHP: 5.3.27
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
 
 --
 -- База данных: `db`
@@ -127,8 +121,41 @@ CREATE TABLE IF NOT EXISTS `operation` (
   `type` tinyint(4) NOT NULL,
   `u_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
 
+--
+-- Дамп данных таблицы `operation`
+--
+
+INSERT INTO `operation` (`id`, `date`, `value`, `s_id`, `k_id`, `a_id`, `type`, `u_id`) VALUES
+(9, '2017-02-25', -4250, 1, 2, 1, -1, NULL),
+(2, '2017-02-03', -2500, 1, 2, 2, -1, NULL),
+(3, '2017-02-03', 2500, 2, 2, 1, -1, NULL),
+(10, '2017-02-21', 1520, 1, 2, 1, -1, NULL),
+(7, '2017-02-09', -1000, 2, 1, 1, 1, NULL),
+(6, '2017-02-09', 1500, 1, 2, 1, -1, NULL),
+(8, '2017-02-09', 3000, 1, 2, 2, -1, NULL),
+(11, '2017-02-01', 150, 2, 2, 2, 1, NULL),
+(12, '2017-02-24', -1, 1, 2, 2, -1, NULL),
+(13, '2017-02-02', -11, 1, 2, 2, -1, NULL),
+(14, '2017-02-02', -25, 1, 2, 2, -1, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Дублирующая структура для представления `operation_view`
+--
+CREATE TABLE IF NOT EXISTS `operation_view` (
+`id` int(11)
+,`date` date
+,`value` int(11)
+,`kname` varchar(50)
+,`sname` varchar(50)
+,`aname` varchar(50)
+,`kid` int(11)
+,`sid` int(11)
+,`aid` int(11)
+);
 -- --------------------------------------------------------
 
 --
@@ -205,6 +232,11 @@ INSERT INTO `workers` (`id`, `work_id`, `nic`, `fam`, `name`, `tel`, `mail`) VAL
 (1, NULL, 'mmk', 'Магомедов', 'Магомед', '896345698213', 'akusha@mail.com'),
 (2, NULL, 'Gas', 'Гасайниев', 'Гасан', '895123458796', 'donkihot@mail.ru');
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+-- --------------------------------------------------------
+
+--
+-- Структура для представления `operation_view`
+--
+DROP TABLE IF EXISTS `operation_view`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `operation_view` AS select `o`.`id` AS `id`,`o`.`date` AS `date`,`o`.`value` AS `value`,`k`.`name` AS `kname`,`s`.`name` AS `sname`,`a`.`name` AS `aname`,`k`.`id` AS `kid`,`s`.`id` AS `sid`,`a`.`id` AS `aid` from (((`operation` `o` join `kagent` `k` on((`o`.`k_id` = `k`.`id`))) join `state` `s` on((`o`.`s_id` = `s`.`id`))) join `acount` `a` on((`o`.`a_id` = `a`.`id`)));

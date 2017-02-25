@@ -3,6 +3,115 @@
 include "conectSQL.php";
 
 
+
+
+//=================== функция получения тега table из таблицы =====================//
+function gettable($table,&$mysqli){
+
+	if ($table === "operation"){
+
+		$sql = "SELECT *  FROM operation_view ";
+
+		$s = "<tr><th>Дата</th><th>Значение</th><th>Контрагент</th><th>Статья</th><th>Счет</th><th><button name='add' class='bd'><span class='fontawesome-plus'></span></button></th><th>.</th></tr>";
+
+	}else {
+
+		$sql = "SELECT * FROM ".$table;
+
+		$s = "<tr><th>Наименовение</th><th>Значение</th><th><button name='add' class='bd'><span class='fontawesome-plus'></span></button></th><th>.</th></tr>";
+
+	}
+
+    $stmt = $mysqli->stmt_init();
+
+    if(($stmt->prepare($sql) === FALSE)
+                or ($stmt->execute() === FALSE)       
+                or (($result = $stmt->get_result()) === FALSE)
+                or ($stmt->close() === FALSE)) {
+        die('Select Error (' . $stmt->errno . ') ' . $stmt->error);
+    }
+
+    echo "<table><thead>".$s."</thead><tbody>";
+    while ($row = $result->fetch_row()) {
+        echo gettr($row);
+    }
+    echo "</tbody></table>";
+}
+
+
+
+
+// =================  функция получения записи из таблицы  ========================//
+function getrow($id,$table,&$mysqli){
+
+
+	if ($table === "operation"){
+
+		$sql = "SELECT *  FROM operation_view WHERE o.id=".$id;
+	}else {
+
+		$sql = "SELECT * FROM ".$table." WHERE id=".$id;
+
+	}
+
+    $stmt = $mysqli->stmt_init();
+
+    if(($stmt->prepare($sql) === FALSE)
+                or ($stmt->execute() === FALSE)      
+                or (($result = $stmt->get_result()) === FALSE)
+                or ($stmt->close() === FALSE)) {
+        die('Select Error (' . $stmt->errno . ') ' . $stmt->error);
+    }
+
+    return $result->fetch_row();
+}
+
+
+// ===============  функция получения тега tr из записи ==================//
+function gettr(&$row){
+
+	$s = "<tr>";
+	if(count($row)>3) $n = 6; else $n = 3;
+		    
+    for($i=1; $i<$n; $i++) {  $s .= "<td>".$row[$i]."</td>";  }		        
+
+    $s .= "<td><button name='bbb' class='bd'  value='$row[0]'><span class='fontawesome-pencil'></span></button></td>
+    <td><button name='ddd' class='bd'  value='$row[0]'><span class='fontawesome-trash'></span></button></td></tr>";
+
+    return $s;
+
+}
+
+//=======================  фуникция удаления записи  из таблицы =================//
+function delete($id,$table,&$mysqli){
+
+	$sql = "DELETE FROM ".$table." WHERE id=".$id;
+
+	$stmt = $mysqli->stmt_init();
+
+    if(($stmt->prepare($sql) === FALSE) 
+        //or ($stmt->bind_param('s',$id) === FALSE)
+        or ($stmt->execute() === FALSE)       
+        or ($stmt->close() === FALSE)) {
+        die('Select Error (' . $stmt->errno . ') ' . $stmt->error);
+    }
+    else echo "Удалено";  
+}
+
+
+function insert($table,&$mysqli){
+
+
+
+}
+
+function update($id,$table,&$mysqli){
+
+
+
+}
+
+
 // =============== Загрузка списков для формы из таблиц acount,kagent,state ====================//
 if (isset($_POST['select'])) {
 
@@ -37,7 +146,7 @@ if (isset($_POST['select'])) {
 
 
 
-//======================== Работа с таблицей operation: загрузка, добавление, изменени и удаление записей ==============//
+//======================== Работа с таблицей operation: загрузка, добавление, изменение и удаление записей ==============//
 
 if (isset($_POST['operation'])){
 
@@ -61,32 +170,11 @@ if (isset($_POST['operation'])){
             die('Select Error (' . $stmt->errno . ') ' . $stmt->error);
             }
         else {
-        	$id = $mysqli->insert_id;
+        	$id = $mysqli->insert_id;        	
 
-        	$sql = "SELECT o.id,date,value,k.name,s.name,a.name,k.id,s.id,a.id  FROM operation as o
-					JOIN kagent as k on o.k_id = k.id
-					JOIN state as s on o.s_id = s.id
-					JOIN acount as a on o.a_id = a.id
-					WHERE o.id=".$id;
+		    $row =getrow($id,"operation",$mysqli); 
 
-		    $stmt = $mysqli->stmt_init();
-		    if(($stmt->prepare($sql) === FALSE)
-		               // or ($stmt->bind_param('s', $table) === FALSE)
-		                or ($stmt->execute() === FALSE)      
-		                or (($result = $stmt->get_result()) === FALSE)
-		                or ($stmt->close() === FALSE)) {
-		        die('Select Error (' . $stmt->errno . ') ' . $stmt->error);
-		    }
-
-		    $row = $result->fetch_row();
-
-		    $tr = "<tr>";
-		    
-	        for($i=1; $i<7; $i++){
-	            $tr .= "<td>".$row[$i]."</td>";
-	        }		        
-	        $tr .= "<td><button name='bbb' class='bd'  value='$row[0]'><span class='fontawesome-pencil'></span></button></td>
-	        <td><button name='ddd' class='bd'  value='$row[0]'><span class='fontawesome-trash'></span></button></td></tr>";
+		    $tr = gettr($row);
 
 	        echo $id.";".$tr;
 
@@ -104,35 +192,13 @@ if (isset($_POST['operation'])){
                     or ($stmt->close() === FALSE)) {
                     die('Select Error (' . $stmt->errno . ') ' . $stmt->error);
                 }
-                else {
+                else {                	
 
-                	$sql = "SELECT o.id,date,value,k.name,s.name,a.name,k.id,s.id,a.id  FROM operation as o
-					JOIN kagent as k on o.k_id = k.id
-					JOIN state as s on o.s_id = s.id
-					JOIN acount as a on o.a_id = a.id
-					WHERE o.id=".$id;
+				    $row = getrow($id,"operation",$mysqli);
 
-				    $stmt = $mysqli->stmt_init();
-				    if(($stmt->prepare($sql) === FALSE)
-				               // or ($stmt->bind_param('s', $table) === FALSE)
-				                or ($stmt->execute() === FALSE)      
-				                or (($result = $stmt->get_result()) === FALSE)
-				                or ($stmt->close() === FALSE)) {
-				        die('Select Error (' . $stmt->errno . ') ' . $stmt->error);
-				    }
-
-				    $row = $result->fetch_row();
-
-				    $tr = "<tr>";
-				    
-			        for($i=1; $i<6; $i++){
-			            $tr .= "<td>".$row[$i]."</td>";
-			        }		        
-			        $tr .= "<td><button name='bbb' class='bd'  value='$row[0]'><span class='fontawesome-pencil'></span></button></td>
-			        <td><button name='ddd' class='bd'  value='$row[0]'><span class='fontawesome-trash'></span></button></td></tr>";
+				    $tr = gettr($row);
 
 			        echo $id.";".$tr;
-
                 } 
     }
 
@@ -141,56 +207,17 @@ if (isset($_POST['operation'])){
 
   
     	if (isset($_POST['id'])){
+		    
+		    $id = $_POST['id'];
 
-		    $sql = "SELECT o.id,date,value,k.name,s.name,a.name,k.id,s.id,a.id  FROM operation as o
-					JOIN kagent as k on o.k_id = k.id
-					JOIN state as s on o.s_id = s.id
-					JOIN acount as a on o.a_id = a.id
-					WHERE o.id=".$_POST['id'];
-
-		    $stmt = $mysqli->stmt_init();
-		    if(($stmt->prepare($sql) === FALSE)
-		               // or ($stmt->bind_param('s', $table) === FALSE)
-		                or ($stmt->execute() === FALSE)      
-		                or (($result = $stmt->get_result()) === FALSE)
-		                or ($stmt->close() === FALSE)) {
-		        die('Select Error (' . $stmt->errno . ') ' . $stmt->error);
-		    }
-
-		    $row = $result->fetch_row(); 
+		    $row =getrow($id,"operation",$mysqli); 
 
 	        echo join(';',$row);
-
 	
 
 		}else{
 
-		    $sql = "SELECT o.id,date,value,k.name,s.name,a.name,k.id,s.id,a.id  FROM operation as o
-					JOIN kagent as k on o.k_id = k.id
-					JOIN state as s on o.s_id = s.id
-					JOIN acount as a on o.a_id = a.id";
-
-		    $stmt = $mysqli->stmt_init();
-		    if(($stmt->prepare($sql) === FALSE)
-		               // or ($stmt->bind_param('s', $table) === FALSE)
-		                or ($stmt->execute() === FALSE)       
-		                or (($result = $stmt->get_result()) === FALSE)
-		                or ($stmt->close() === FALSE)) {
-		        die('Select Error (' . $stmt->errno . ') ' . $stmt->error);
-		    }
-		    // echo "<button name='add' class='bd'><span class='fontawesome-plus'></span></button>";   
-		    echo "<table><thead>";
-		    echo "<tr><th>Дата</th><th>Значение</th><th>Контрагент</th><th>Статья</th><th>Счет</th><th><button name='add' class='bd'><span class='fontawesome-plus'></span></button></th><th>.</th></tr></thead><tbody>";
-		    while ($row = $result->fetch_row()) {
-		        echo "<tr>";
-		        for($i=1; $i<6; $i++){
-		            echo "<td>".$row[$i]."</td>";
-		        }		        
-		        echo "<td><button name='bbb' class='bd'  value='$row[0]'><span class='fontawesome-pencil'></span></button></td>";
-		        echo "<td><button name='ddd' class='bd'  value='$row[0]'><span class='fontawesome-trash'></span></button></td>";
-		        echo "</tr>";
-		    }
-		    echo "</tbody></table>";
+		    gettable("operation",$mysqli);
 		}
 
     }
@@ -200,16 +227,7 @@ if (isset($_POST['operation'])){
 
     	$id = $_POST['id'];
 
-    	$sql = "DELETE FROM operation WHERE id=".$id;
-
-        if(($stmt->prepare($sql) === FALSE) 
-            //or ($stmt->bind_param('s',$id) === FALSE)
-            or ($stmt->execute() === FALSE)       
-            or ($stmt->close() === FALSE)) {
-            die('Select Error (' . $stmt->errno . ') ' . $stmt->error);
-	    }
-	    else echo "Удалено";  
-
+    	delete($id,"operation",$mysqli);
 
     }
 
@@ -221,32 +239,7 @@ if (isset($_POST['table'])){
 
 	$table = $_POST['table'];
 
-	$stmt = $mysqli->stmt_init(); 
-
-	$sql = "SELECT * FROM ".$table;
-	echo $sql;
-
-	if(($stmt->prepare($sql) === FALSE)
-		               // or ($stmt->bind_param('s', $table) === FALSE)
-		                or ($stmt->execute() === FALSE)       
-		                or (($result = $stmt->get_result()) === FALSE)
-		                or ($stmt->close() === FALSE)) {
-		        die('Select Error (' . $stmt->errno . ') ' . $stmt->error);
-		    }
-
-    echo "<table>";
-    echo "<tr><th>Наименовение</th><th>Значение</th><th><button name='add' class='bd'><span class='fontawesome-plus'></span></button></th><th>.</th></tr>";
-    while ($row = $result->fetch_row()) {
-        echo "<tr>";
-        for($i=1; $i<3; $i++){
-            echo "<td>".$row[$i]."</td>";
-        }		        
-        echo "<td><button name='bbb' class='bd'  value='$row[0]'><span class='fontawesome-pencil'></span></button></td>";
-        echo "<td><button name='ddd' class='bd'  value='$row[0]'><span class='fontawesome-trash'></span></button></td>";
-        echo "</tr>";
-    }
-    echo "</table>";
-
+	gettable($table,$mysqli);
 
 }
 
