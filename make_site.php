@@ -24,16 +24,8 @@
 				<ul class = "topmenu">
                     <li id="new_item" class="fontawesome-reorder"></li>
                     <li id="main" class="fontawesome-home"></li>
-					<li id="other" class="fontawesome-caret-down"></li>
 					
 <!--
-					<li>Наши проекты 
-						<ul id="tables" class = "submenu">
-							<li>Строительная фирма</li>
-							<li>Рекламный сайт</li>
-							<li>Финансовый учет</li>
-						</ul>
-					</li>
 -->
 					<li><span>разработка сайтов</span></li>
 					<li><span>раскрутка инстаграмм</span></li>
@@ -42,6 +34,17 @@
 					<li><span>маркетинг</span></li>
 					<li><span>брендинг</span></li>
 					<li><span>контакты</span></li>
+					<li id="other" class="fontawesome-caret-down">
+							<ul id="tables" class = "submenu">
+								<li><span>разработка сайтов</span></li>
+								<li><span>раскрутка инстаграмм</span></li>
+								<li><span>реклама в интеренете</span></li>
+								<li><span>привлечение клиентов</span></li>
+								<li><span>маркетинг</span></li>
+								<li><span>брендинг</span></li>
+								<li><span>контакты</span></li>
+							</ul>
+						</li>
 					
 					
 				</ul>

@@ -62,7 +62,7 @@ nav ul{
 .topmenu>li{  
 	position: relative;
 	display: inline-table;  
-	width: 7em;
+	width: 120px;
 	height: 50px;
 	vertical-align: middle;
 	text-align: center; 
@@ -82,8 +82,9 @@ li>span{
 	visibility: hidden;
 	opacity: 0;
 	margin: 0;
+	padding-left: 10px;
 	top: 100%;
-	width: 150%;
+	width: 200px;
 	z-index: 11;
 }
 .topmenu li:hover>.submenu{
@@ -105,6 +106,9 @@ li>span{
 	position: fixed;
 	top:0;
 	z-index: 10;
+}
+nav>ul>li:nth-last-child(2){
+	float: right;	
 }
 /*======================================== КОНЕЦ ГЛАВНОГО МЕНЮ =============================*/
 
