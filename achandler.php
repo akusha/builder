@@ -8,19 +8,15 @@ include "conectSQL.php";
 //=================== функция получения тега table из таблицы =====================//
 function gettable($table,&$mysqli){
 
-	if ($table === "operation"){
+	$s = "<tr><th>";
 
-		$sql = "SELECT *  FROM operation_view ";
+	if ($table === "operation") $s .= "Дата</th><th>Значение</th><th>Контрагент</th><th>Статья</th><th>Счет";
 
-		$s = "<tr><th>Дата</th><th>Значение</th><th>Контрагент</th><th>Статья</th><th>Счет</th><th><button name='add' class='bd'><span class='fontawesome-plus'></span></button></th><th>.</th></tr>";
+	else $s .= "Наименовение</th><th>Значение";
 
-	}else {
+	$s .= "</th><th><button name='add' class='bd'><span class='fontawesome-plus'></span></button></th><th>.</th></tr>";
 
-		$sql = "SELECT * FROM ".$table;
-
-		$s = "<tr><th>Наименовение</th><th>Значение</th><th><button name='add' class='bd'><span class='fontawesome-plus'></span></button></th><th>.</th></tr>";
-
-	}
+	$sql = "SELECT * FROM ".$table;
 
     $stmt = $mysqli->stmt_init();
 
@@ -42,17 +38,9 @@ function gettable($table,&$mysqli){
 
 
 // =================  функция получения записи из таблицы  ========================//
-function getrow($id,$table,&$mysqli){
+function getrow($id,$table,&$mysqli){	
 
-
-	if ($table === "operation"){
-
-		$sql = "SELECT *  FROM operation_view WHERE o.id=".$id;
-	}else {
-
-		$sql = "SELECT * FROM ".$table." WHERE id=".$id;
-
-	}
+	$sql = "SELECT * FROM ".$table." WHERE id=".$id;	
 
     $stmt = $mysqli->stmt_init();
 
@@ -101,14 +89,45 @@ function delete($id,$table,&$mysqli){
 
 function insert($table,&$mysqli){
 
+	$date = $_POST['date'];
+	$kagent = $_POST['kagent'];
+	$acount = $_POST['acount'];
+	$state = $_POST['state'];
+	$count = $_POST['count'];
 
+	$stmt = $mysqli->stmt_init(); 
+
+    if(($stmt->prepare("INSERT INTO operation (date,k_id,s_id,a_id,value) VALUES (?,?,?,?,?)") === FALSE) 
+        or ($stmt->bind_param('siiiii', $date, $kagent,$state,$acount,$count) === FALSE)
+        or ($stmt->execute() === FALSE)      
+        or ($stmt->close() === FALSE)) {
+        	die('Select Error (' . $stmt->errno . ') ' . $stmt->error);
+        	return false;
+        }
+    else 
+    	return true;   
 
 }
 
 function update($id,$table,&$mysqli){
 
+	$date = $_POST['date'];
+	$kagent = $_POST['kagent'];
+	$acount = $_POST['acount'];
+	$state = $_POST['state'];
+	$count = $_POST['count'];
 
+	$stmt = $mysqli->stmt_init(); 
 
+	if(($stmt->prepare("UPDATE  operation set date=? ,k_id=? , s_id=? , a_id=? , value=?  WHERE id=? ") === FALSE) 
+        or ($stmt->bind_param('siiiii', $date, $kagent,$state,$acount,$count,$id) === FALSE)
+        or ($stmt->execute() === FALSE)      
+        or ($stmt->close() === FALSE)) {
+        	die('Select Error (' . $stmt->errno . ') ' . $stmt->error);
+    		return false;
+    }
+    else 
+    	return true;
 }
 
 
@@ -194,7 +213,7 @@ if (isset($_POST['operation'])){
                 }
                 else {                	
 
-				    $row = getrow($id,"operation",$mysqli);
+				    $row = getrow($id,"operation_view",$mysqli);
 
 				    $tr = gettr($row);
 
@@ -210,7 +229,7 @@ if (isset($_POST['operation'])){
 		    
 		    $id = $_POST['id'];
 
-		    $row =getrow($id,"operation",$mysqli); 
+		    $row =getrow($id,"operation_view",$mysqli); 
 
 	        echo join(';',$row);
 	
