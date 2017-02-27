@@ -18,13 +18,8 @@ window.onscroll = function() {
 
 
 var bool = false;
-var s = "";
 
-for (var i=0;i<25;i++) {
-	s += "<li>" + i + " hglhgldfkjggh </li>";
-}
 
-left_menu.innerHTML = s;
 
 document.getElementById('new_item').onclick = function (){
 
@@ -34,7 +29,24 @@ document.getElementById('new_item').onclick = function (){
 		document.getElementById("visib").classList.add('visib');
 }
 
-window.onresize = function() {
-	document.getElementById("widhei").innerHTML = document.documentElement.clientWidth;
-}
+//window.onresize = function() {
+//	document.getElementById("widhei").innerHTML = document.documentElement.clientWidth;
+//}
 
+
+
+window.onload = function(){
+	
+	var li = document.getElementsByClassName('item');
+	
+	for (var i=0;i<li.length;i++){
+		
+		li[i].onclick = function (){
+			
+			document.getElementsByClassName('conteiner')[0].innerHTML = this.getAttribute('value2');
+			
+		}
+		
+	}	
+	
+}

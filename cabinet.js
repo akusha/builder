@@ -6,7 +6,6 @@ function dKuk(){		// Удаление куки.
 
  var workers = document.getElementById('form_workers'); 
  var obgects = document.getElementById('form_obgects');
- var httpreq = getXmlHttp();
  var currenttable;  	//Выбранная таблица из меню
  var submit_obg = document.getElementById('submit_obg');
  var update_obg = document.getElementById('update_obg');
@@ -33,6 +32,7 @@ function dKuk(){		// Удаление куки.
  	}
  	return xmlhttp;
  }
+ var httpreq = getXmlHttp();
 
 
  document.getElementById('workers').onclick = function (){   // =====  Выбор пункта меню Рабочие
