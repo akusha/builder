@@ -66,11 +66,13 @@ function menuClick(){
 
 	document.getElementsByClassName('conteiner')[0].getElementsByTagName('h2')[0].innerHTML=this.innerHTML;
 	switch (menu_id) {
-		case "op":getTable();		currentTable = "operation"; break;
-		case "st":getKAS("state");  currentTable = "state"; 	break;
-		case "ac":getKAS("acount"); currentTable = "acount"; 	break;
-		case "ka":getKAS("kagent"); currentTable = "kagent"; 	break;
+		case "op":currentTable = "operation"; break;
+		case "st":currentTable = "state"; 	break;
+		case "ac":currentTable = "acount"; 	break;
+		case "ka":currentTable = "kagent"; 	break;
 	}
+
+	getTable();
 
 }
 
@@ -115,19 +117,27 @@ function initializebbb(){
 
  	//o.id,date,value,k.name,s.name,a.name,k.id,s.id,a.id
 
- 	var s = data.split(';'); 	
+ 	var s = data.split(';'); 
 
- 	document.getElementsByName('date')[0].value=s[1] ;
+ 	if (currentTable=="operation")	{
 
-	document.getElementsByName('state')[0].value = s[7];
-	document.getElementsByName('kagent')[0].value=s[6];
-	document.getElementsByName('acount')[0].value=s[8];	
+	 	document.getElementsByName('date')[0].value=s[1] ;
 
-	s[2] = parseInt(s[2]);
-	
-	document.getElementsByName('type')[0].value=getTypeOp(s[2]);
-	document.getElementsByName('count')[0].value=Math.abs(s[2]);
-	document.getElementsByName('id')[0].value=s[0];		
+		document.getElementsByName('state')[0].value = s[7];
+		document.getElementsByName('kagent')[0].value=s[6];
+		document.getElementsByName('acount')[0].value=s[8];	
+
+		s[2] = parseInt(s[2]);
+		
+		document.getElementsByName('type')[0].value=getTypeOp(s[2]);
+		document.getElementsByName('count')[0].value=Math.abs(s[2]);
+		document.getElementsByName('id')[0].value=s[0];		
+	}else{
+
+		document.getElementsByName('name')[0].value = s[1];
+		document.getElementsByName('rec')[0].value = s[2];
+
+	}
 
  }
 
@@ -164,12 +174,11 @@ var currentTR;
  	currentTR = this.parentElement.parentElement;
  	document.getElementsByName('id')[0].value = id; 
 
-
  	switch (name) {   
 
  		case 'bbb':   // изменить 	
 
- 			execute("operation=get&id="+id,function(){
+ 			execute("operation=get&id="+id+"&table="+currentTable,function(){
 
  				if (httpreq.readyState == 4) {
  					if(httpreq.status == 200) {
@@ -230,30 +239,11 @@ function getOption(){
 		 		});		
 }
 
-function getKAS(tablename){
-
-	var table = document.getElementById('table'),
-		body = "table="+tablename;
-
-	execute(body,function(){
-
- 		if (httpreq.readyState == 4) {
- 			if(httpreq.status == 200) {
- 				table.innerHTML = httpreq.responseText;          
- 				initializebbb();
- 			}
-
- 		} 	
-
-	});
-
-}
-
 
 function getTable(){
 
 	var table = document.getElementById('table'),
-		body = "operation=get";
+		body = "operation=get&table="+currentTable;
 
 	execute(body,function(){
 
@@ -294,22 +284,33 @@ document.getElementById('insert').onclick = function (){
 		count = document.getElementsByName('count')[0].value,
 		type = document.getElementsByName('type')[0].value,
 		id = document.getElementsByName('id')[0].value,
-		operation = document.getElementsByName('operation')[0].value;
+		operation = document.getElementsByName('operation')[0].value,
+
+		name = document.getElementsByName('name')[0].value,
+		rec = document.getElementsByName('rec')[0].value,
+
+		body;
 
 		type = parseInt(type);
 		count = parseInt(count);
 
 		count *=type;
 
-	var body = "operation="+operation+"&date="+date+"&state="+state+"&kagent="+kagent+"&acount="+acount+"&count="+count;
+	body = "operation="+operation+"&table="+currentTable;
+
+	if  (currentTable=="operation")
+		body +="&date="+date+"&state="+state+"&kagent="+kagent+"&acount="+acount+"&count="+count;				
+	else if (currentTable == "state") 
+		body +="&name="+name+"&type="+rec; 
+	else 
+		body +="&name="+name+"&rec="+rec; 
 
 	if (operation == "update") body += "&id="+id;
 
 	execute(body,function(){					// ========== Сохранение =========== //
 
 		if (httpreq.readyState == 4) {
-		 			if(httpreq.status == 200) {	   				 			
-		 				
+		 			if(httpreq.status == 200) {	 		 				
 
 		 				var s =  httpreq.responseText.split(';');
 		 			
@@ -321,6 +322,8 @@ document.getElementById('insert').onclick = function (){
 			 				}
 			 				toggleform(true);
 			 				initializebbb();
+			 				if (currentTable != "operation") 
+			 					getOption();
 			 				}
 		 				}		 				
 		 			}		 			

@@ -10,13 +10,15 @@ function gettable($table,&$mysqli){
 
 	$s = "<tr><th>";
 
-	if ($table === "operation") $s .= "Дата</th><th>Значение</th><th>Контрагент</th><th>Статья</th><th>Счет";
+	if ($table === "operation_view") $s .= "Дата</th><th>Значение</th><th>Контрагент</th><th>Статья</th><th>Счет";
 
 	else $s .= "Наименовение</th><th>Значение";
 
 	$s .= "</th><th><button name='add' class='bd'><span class='fontawesome-plus'></span></button></th><th>.</th></tr>";
 
-	$sql = "SELECT * FROM ".$table;
+	$sql = "SELECT * FROM ".$mysqli->real_escape_string($table);
+
+	echo $sql;
 
     $stmt = $mysqli->stmt_init();
 
@@ -35,16 +37,15 @@ function gettable($table,&$mysqli){
 }
 
 
-
-
 // =================  функция получения записи из таблицы  ========================//
 function getrow($id,$table,&$mysqli){	
 
-	$sql = "SELECT * FROM ".$table." WHERE id=".$id;	
+	$sql = "SELECT * FROM ".$mysqli->real_escape_string($table)." WHERE id=?";	
 
     $stmt = $mysqli->stmt_init();
 
     if(($stmt->prepare($sql) === FALSE)
+    	 		or ($stmt->bind_param('s',$id) === FALSE)
                 or ($stmt->execute() === FALSE)      
                 or (($result = $stmt->get_result()) === FALSE)
                 or ($stmt->close() === FALSE)) {
@@ -70,15 +71,15 @@ function gettr(&$row){
 
 }
 
-//=======================  фуникция удаления записи  из таблицы =================//
+//=======================  функция удаления записи  из таблицы =================//
 function delete($id,$table,&$mysqli){
 
-	$sql = "DELETE FROM ".$table." WHERE id=".$id;
+	$sql = "DELETE FROM ".$mysqli->real_escape_string($table)." WHERE id=?";
 
 	$stmt = $mysqli->stmt_init();
 
     if(($stmt->prepare($sql) === FALSE) 
-        //or ($stmt->bind_param('s',$id) === FALSE)
+        or ($stmt->bind_param('s',$id) === FALSE)
         or ($stmt->execute() === FALSE)       
         or ($stmt->close() === FALSE)) {
         die('Select Error (' . $stmt->errno . ') ' . $stmt->error);
@@ -86,57 +87,90 @@ function delete($id,$table,&$mysqli){
     else echo "Удалено";  
 }
 
+// ========== Функция добавления и обновления записей. Если id = null то происходить добавление иначе обновление =========//
 
-function insert($table,&$mysqli){
-
-	$date = $_POST['date'];
-	$kagent = $_POST['kagent'];
-	$acount = $_POST['acount'];
-	$state = $_POST['state'];
-	$count = $_POST['count'];
+function insert($id,$table,&$mysqli,&$arg){
 
 	$stmt = $mysqli->stmt_init(); 
 
-    if(($stmt->prepare("INSERT INTO operation (date,k_id,s_id,a_id,value) VALUES (?,?,?,?,?)") === FALSE) 
-        or ($stmt->bind_param('siiiii', $date, $kagent,$state,$acount,$count) === FALSE)
-        or ($stmt->execute() === FALSE)      
-        or ($stmt->close() === FALSE)) {
-        	die('Select Error (' . $stmt->errno . ') ' . $stmt->error);
-        	return false;
-        }
-    else 
-    	return true;   
+	// Создаём массив для столбцов куда будем вставлять новое значение
+	$columns = array(); 
+	// Создаём массив для значений которые будем вставлять
+	$values = array(); 
 
-}
+	$n = count($arg); 
 
-function update($id,$table,&$mysqli){
+	if ($id != null) $n+=1;
 
-	$date = $_POST['date'];
-	$kagent = $_POST['kagent'];
-	$acount = $_POST['acount'];
-	$state = $_POST['state'];
-	$count = $_POST['count'];
+	$paramstype = str_repeat("s", $n);
 
-	$stmt = $mysqli->stmt_init(); 
+	$values[] = $paramstype;
 
-	if(($stmt->prepare("UPDATE  operation set date=? ,k_id=? , s_id=? , a_id=? , value=?  WHERE id=? ") === FALSE) 
-        or ($stmt->bind_param('siiiii', $date, $kagent,$state,$acount,$count,$id) === FALSE)
-        or ($stmt->execute() === FALSE)      
-        or ($stmt->close() === FALSE)) {
-        	die('Select Error (' . $stmt->errno . ') ' . $stmt->error);
-    		return false;
+	// Разбираем массив с данными по столбцам. array('title' => '1223', 'content' => 'dadsd')
+	foreach ($arg as $column => $value)
+	{
+		// Экранируем специальные символы в названии столбца
+		$column = $mysqli->real_escape_string($column);
+
+		// Добавляем каждый столбец в массив столбцов
+		$columns[] = "`$column`";		
+
+		// Записываем нулы пустых значений, чтобы длины значений и столбцов были равны
+		if ($value === NULL)
+		{
+			// Добавляем значение в массив значений
+			$values[] = "''";
+		}
+		else
+		{
+			// Добавляем каждое значение в массив значений		
+			$values[] = $mysqli->real_escape_string($value);;
+		}
+	}
+
+	if ($id == NULL)  {
+
+	  $playsholders ="?".str_repeat(',?',count($arg)-1);
+
+	  $sql = "INSERT INTO ".$mysqli->real_escape_string($table)." (".join(',',$columns).") VALUES (".$playsholders.")";
+
+	}else {
+
+	  $sql = "UPDATE ".$mysqli->real_escape_string($table)." SET ".join('=?,',$columns)."=? WHERE id=?";
+
+	  $values[] = $id;
+
+	}
+
+	// bind_param('siiiii', $date, $kagent,$state,$acount,$count)
+
+    if(($stmt->prepare($sql) === FALSE) 
+    or (call_user_func_array(array($stmt,'bind_param'), refValues($values))  === FALSE)
+    or ($stmt->execute() === FALSE)      
+    or ($stmt->close() === FALSE)) {
+    	die('Select Error (' . $stmt->errno . ') ' . $stmt->error);
+    	return false;
     }
     else 
-    	return true;
+    	return true; 
+}
+
+function refValues($arr){
+    if (strnatcmp(phpversion(),'5.3') >= 0) //Reference is required for PHP 5.3+
+    {
+        $refs = array();
+        foreach($arr as $key => $value)
+            $refs[$key] = &$arr[$key];
+        return $refs;
+    }
+    return $arr;
 }
 
 
 // =============== Загрузка списков для формы из таблиц acount,kagent,state ====================//
 if (isset($_POST['select'])) {
 
-	$sql = "select 'kagent' as t,id, name,rec from kagent 
-			union select 'acount' as t,id, name,rec from acount 
-			union select 'state' as t,id, name,type from state";
+	$sql = "select * from kas";
 
     $stmt = $mysqli->stmt_init();
     if(($stmt->prepare($sql) === FALSE)
@@ -165,78 +199,75 @@ if (isset($_POST['select'])) {
 
 
 
+
 //======================== Работа с таблицей operation: загрузка, добавление, изменение и удаление записей ==============//
 
 if (isset($_POST['operation'])){
 
 	$operation = $_POST['operation'];	
+	$table = $_POST['table'];
+	$id = $_POST['id'];
 
-	$date = $_POST['date'];
-	$kagent = $_POST['kagent'];
-	$acount = $_POST['acount'];
-	$state = $_POST['state'];
-	$count = $_POST['count'];
+	if(isset($_POST['date']))  $arg['date'] = $_POST['date'];
+	if(isset($_POST['kagent'])) $arg['k_id'] = $_POST['kagent'];
+	if(isset($_POST['acount'])) $arg['s_id'] = $_POST['acount'];
+	if(isset($_POST['state'])) $arg['a_id'] = $_POST['state'];
+	if(isset($_POST['count'])) $arg['value'] = $_POST['count'];
+
+	if(isset($_POST['name'])) $arg['name'] = $_POST['name'];
+	if(isset($_POST['rec'])) $arg['rec'] = $_POST['rec'];
+	if(isset($_POST['type'])) $arg['type'] = $_POST['type'];
+
 
 	$stmt = $mysqli->stmt_init(); 
 
 	//============ INSERT ===========//
-    if ($operation == "insert"){    	
-	          
-        if(($stmt->prepare("INSERT INTO operation (date,k_id,s_id,a_id,value) VALUES (?,?,?,?,?)") === FALSE) 
-            or ($stmt->bind_param('siiiii', $date, $kagent,$state,$acount,$count) === FALSE)
-            or ($stmt->execute() === FALSE)      
-            or ($stmt->close() === FALSE)) {
-            die('Select Error (' . $stmt->errno . ') ' . $stmt->error);
-            }
-        else {
+    if ($operation == "insert"){  		
+
+		if (insert(null,$table,$mysqli,$arg)){
+
         	$id = $mysqli->insert_id;        	
 
-		    $row =getrow($id,"operation",$mysqli); 
+		    $row =getrow($id,$table,$mysqli); 
 
 		    $tr = gettr($row);
 
 	        echo $id.";".$tr;
+	    }
 
-        }
     }
 
     //========== UPDATE =============//
-    if ($operation == "update")    {
+    if ($operation == "update")    {    	
 
-    	$id = $_POST['id'];
+    	if(insert($id,$table,$mysqli,$arg)){     
 
-    	if(($stmt->prepare("UPDATE  operation set date=? ,k_id=? , s_id=? , a_id=? , value=?  WHERE id=? ") === FALSE) 
-                    or ($stmt->bind_param('siiiii', $date, $kagent,$state,$acount,$count,$id) === FALSE)
-                    or ($stmt->execute() === FALSE)      
-                    or ($stmt->close() === FALSE)) {
-                    die('Select Error (' . $stmt->errno . ') ' . $stmt->error);
-                }
-                else {                	
+    		if ($table === "operation") $table = "operation_view";           	
 
-				    $row = getrow($id,"operation_view",$mysqli);
+		    $row = getrow($id,$table,$mysqli);
 
-				    $tr = gettr($row);
+		    $tr = gettr($row);
 
-			        echo $id.";".$tr;
-                } 
+	        echo $id.";".$tr;
+        } 
     }
 
     //============ GET ============//
     if ($operation == "get"){
 
+    	if ($table === "operation") $table = "operation_view";
   
     	if (isset($_POST['id'])){
 		    
 		    $id = $_POST['id'];
 
-		    $row =getrow($id,"operation_view",$mysqli); 
+		    $row =getrow($id,$table,$mysqli); 
 
-	        echo join(';',$row);
-	
+	        echo join(';',$row);	
 
 		}else{
 
-		    gettable("operation",$mysqli);
+		    gettable($table,$mysqli);
 		}
 
     }
@@ -244,27 +275,9 @@ if (isset($_POST['operation'])){
     // ======================= DELETE ================== //
     if ($operation == "delete"){
 
-    	$id = $_POST['id'];
-
-    	delete($id,"operation",$mysqli);
+    	delete($id,$table,$mysqli);
 
     }
 
 
 }	//======================== Конец работы с таблицей operation ==============//
-
-
-if (isset($_POST['table'])){
-
-	$table = $_POST['table'];
-
-	gettable($table,$mysqli);
-
-}
-
-
-
-
-
-
-?>
