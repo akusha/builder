@@ -288,5 +288,6 @@ td {
   transition: .3s linear;
 }
 tr:hover td{
-  color: #10244d;
+  color: #CED3DC;
+  background: #696363;
 }

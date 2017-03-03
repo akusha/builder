@@ -18,8 +18,6 @@ function gettable($table,&$mysqli){
 
 	$sql = "SELECT * FROM ".$mysqli->real_escape_string($table);
 
-	echo $sql;
-
     $stmt = $mysqli->stmt_init();
 
     if(($stmt->prepare($sql) === FALSE)
