@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Делаем сайты</title>
+        <title>budget</title>
         <link rel="shortcut icon" href="image/logo_hb.jpg" type="image/x-icon">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="site.css">
         <meta charset="utf-8">    
     </head>
-    <body>
-    	<div class="logo">
+	<body>
+		<div class="logo">
 			<div class ="logos">
 				<img src="image/logo_400_300.png">
 			</div>
 			<div class ="log1">
 				<h1>Сайты на любой вкус.</h1><br>
 			</div>
-			
+
 			<div class ="log2">
 				<span class="span">hedbed.ru</span>
 			</div>
-					
+
 			<div class="log3">
 				<p>тел. 8(965)714-44-55</p>
 			</div>
@@ -27,12 +27,12 @@
 				<nav>
 					<li id="new_item" class="fontawesome-reorder"></li>
 					<li><a href="#img1">разработка сайта</a></li>
-					<li><a href="#" onclick="up()">раскрутка инстаграмм</a></li>
+					<li><a href="#img2">раскрутка инстаграмм</a></li>
 					<li><span>реклама в интеренете</span></li>
 					<li><span>контакты</span></li>
 				</nav>
 			</div>
-    	</div>
+		</div>
     	
     	
     	<div class="conteiner">
