@@ -2,15 +2,59 @@
 //left_menu = document.getElementsByClassName('left_menu')[0];
 
 
-var t;
-function up() {
-  var top = Math.max(document.body.scrollTop,document.documentElement.scrollTop);
-  if(top < 1000) {
-    window.scrollBy(0, 60);
-    t = setTimeout('up()',30);
-  } else clearTimeout(t);
-  return false;
+var t, top_el, top_h2, kk;
+var step, speed, href;
+function up(id, st, sp) {
+	href=id;
+	step = st||40;
+	speed = sp||10;
+//	if(st===undefined) step=40; 
+//	if(sp===undefined) speed=20;
+	top_el = document.getElementById(href).getBoundingClientRect().top;
+	if(top_el>step){
+		window.scrollBy(0, step);
+		t = setTimeout('up("'+href+'", '+step+', '+speed+')', speed);
+	} else {
+		clearTimeout(t);
+		window.scrollBy(0, top_el);
+	}
 }
+
+window.onscroll = function(){
+	top_h2 = document.getElementById("img2").getBoundingClientRect().top;
+	document.getElementById("h2").innerHTML = top_h2;
+}
+
+//function scroll(){
+//  	if (top1<s) {
+//		s=top1;
+//		window.scrollBy(0, s);	
+//		clearInterval(t);
+//	}
+//else 
+//{
+//	window.scrollBy(0, s);
+//	top1 = top1-s;}
+//}
+
+//function up() {
+//	top1 = document.getElementById("img2").getBoundingClientRect().top;
+//	
+////  var top = Math.max(document.body.scrollTop,document.documentElement.scrollTop);
+//	if(top1 > 40) {
+//    window.scrollBy(0, 40);
+//    t = setTimeout('up()',5);
+//  	} else { 
+//		clearTimeout(t);
+//		window.scrollBy(0, s);
+//		}
+//  return false;
+//}
+//function rar(){
+//window.onscroll = function() {	
+//	var gget = document.getElementById("img2").getBoundingClientRect();
+//	document.getElementById("rar").innerHTML=gget.top;
+//}
 
 //window.onscroll = function() {
 //	var scrolled = window.pageYOffset || document.documentElement.scrollTop;

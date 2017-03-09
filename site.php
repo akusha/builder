@@ -26,8 +26,8 @@
 			<div class="menu">
 				<nav>
 					<li id="new_item" class="fontawesome-reorder"></li>
-					<li><a href="#img1">разработка сайта</a></li>
-					<li><a href="#" onclick="up()">раскрутка инстаграмм</a></li>
+					<li><a href="#" onclick="up('img1',30, 20)">разработка сайта</a></li>
+					<li><a href="#" onclick="up('img2')">раскрутка инстаграмм</a></li>
 					<li><span>реклама в интеренете</span></li>
 					<li><span>контакты</span></li>
 				</nav>
@@ -39,8 +39,8 @@
 			<div>
 				<img src="image/mockup_logo.jpg" id="img1">
 				<div class="head_h2">
-					<h2>
-						Разработать сайт - это то что будем делать мы, вы занимайтесь своим делом.)))
+					<h2 id="rar" onclick="rar()">
+						999
 					</h2>
 				</div>
 			</div>
@@ -48,8 +48,8 @@
 			<div>
 				<img src="image/hedbed.jpg" id="img2">
 				<div class="head_h2">
-					<h2>
-						Раскрутить инстаграмм, да в два счета.))) Только на деньги не скупитесь.))
+					<h2 id = "h2">
+						
 					</h2>
 				</div>
 			</div>
